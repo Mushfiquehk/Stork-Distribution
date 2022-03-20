@@ -1,0 +1,180 @@
+{% extends "./base.html" %}
+{% block content %}
+<section class="text-gray-600 bg-white body-font shadow-md">
+    <div class="container mx-auto flex px-5 py-12 md:flex-row flex-col items-center">
+     {% comment %}  <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-cyan-600">All your packaging needs
+          <br class="hidden lg:inline-block">met in one place
+        </h1>
+        <p class="mb-8 leading-relaxed">We provide great prices for all dispensary packaging and accessories. Browse top-quality items from our favorite vendors. Choose the best products and design or customize your own with help from an expert.</p>
+        <div class="flex justify-center">
+          <button class="inline-flex text-white bg-cyan-600 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-800 rounded text-lg">Shop Now</button>
+        </div>
+      </div> {% endcomment %}
+      <div class="lg:flex-grow md:w-1/2 px-6 py-12 md:flex flex-col items-center sm:px-6">
+        <div class="max-w-md w-full space-y-8">
+          <div>
+            <h1 class="mt-6 text-center text-4xl font-extrabold text-gray-900">Welcome to Stork Distributions</h1>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+              Or
+              <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> create a new account </a>
+            </p>
+          </div>
+
+          <!-- Sign in -->
+          <form class="mt-8 space-y-6" action="{% url 'store:home' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="remember" value="true">
+            <div class="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label for="username" class="sr-only">Username</label>
+                <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username">
+              </div>
+              <div>
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+              </div>
+            </div>
+      
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+              </div>
+      
+              <div class="text-sm">
+                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+              </div>
+            </div>
+      
+            <div>
+              <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <!-- Heroicon name: solid/lock-closed -->
+                  <svg class="h-5 w-5 text-blue-800 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+                Sign in
+              </button>
+            </div>
+          </form><!-- Sign in -->
+
+
+        </div>
+      </div>
+      <div class="lg:max-w-lg lg:w-full sm:w-1/2 w-5/6">
+        <img class="object-cover object-center rounded" alt="hero" src='static\default.png'>
+      </div>
+    </div>
+</section>
+
+<!-- BEST SELLERS -->
+<section class="text-gray-600 body-font">
+    <div class="container px-5 pt-8 pb-24 mx-auto">
+        <div class="flex w-full mb-10 flex-wrap">
+            <h1 class="sm:text-3xl text-2xl font-medium body-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">SHOP BEST SELLERS</h1>
+            <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
+        </div>
+        <!-- Product Cards -->
+        <div class="flex flex-wrap -m-4">
+          {% for product in featured %}
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full drop-shadow-lg">
+            <a class="block relative h-48 rounded overflow-hidden" href="{{ product.get_absolute_url }}">
+              <img alt="bestseller" class="object-cover object-center w-full h-full block" src="{{ product.image.url }}">
+            </a>
+            <div class="mt-4">
+              <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ product.category }}</h3>
+              <h2 class="text-gray-900 title-font text-lg font-medium">{{ product.name }}</h2>
+              <p class="mt-1 text-xs">Short Description of the product if available</p>
+              <div class="flex justify-between items-end mt-4">
+                <div class="text-md font-medium">{{ product.price }}</div>
+                <button class="bg-cyan-600 hover:bg-cyan-800 text-white font-medium py-2 px-4 rounded">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+</section><!-- Best Sellers -->
+
+<!-- Custom Designs -->
+<section class="bg-gray-800 lg:py-12 lg:flex lg:justify-center lg:min-h-full lg:shadow-lg">
+  <div class="bg-gray-800">
+    <div class="max-w-2xl mx-auto py-24 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs</h2>
+        <p class="mt-4 text-gray-400">The walnut wood card tray is precision milled to perfectly fit a stack of Focus cards. The powder coated steel divider separates active cards from new ones, or can be used to archive important task lists.</p>
+  
+        <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+          <div class="border-t border-gray-200 pt-4">
+            <dt class="font-medium text-gray-200">Origin</dt>
+            <dd class="mt-2 text-sm text-gray-400">Designed by Good Goods, Inc.</dd>
+          </div>
+  
+          <div class="border-t border-gray-200 pt-4">
+            <dt class="font-medium text-gray-200">Material</dt>
+            <dd class="mt-2 text-sm text-gray-400">Solid walnut base with rare earth magnets and powder coated steel card cover</dd>
+          </div>
+  
+          <div class="border-t border-gray-200 pt-4">
+            <dt class="font-medium text-gray-200">Dimensions</dt>
+            <dd class="mt-2 text-sm text-gray-400">6.25&quot; x 3.55&quot; x 1.15&quot;</dd>
+          </div>
+  
+          <div class="border-t border-gray-200 pt-4">
+            <dt class="font-medium text-gray-200">Finish</dt>
+            <dd class="mt-2 text-sm text-gray-400">Hand sanded and finished with natural oil</dd>
+          </div>
+  
+          <div class="border-t border-gray-200 pt-4">
+            <dt class="font-medium text-gray-200">Includes</dt>
+            <dd class="mt-2 text-sm text-gray-400">Wood card tray and 3 refill packs</dd>
+          </div>
+  
+          <div class="border-t border-gray-200 pt-4">
+            <dt class="font-medium text-gray-200">Considerations</dt>
+            <dd class="mt-2 text-sm text-gray-400">Made from natural materials. Grain and color vary with each item.</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
+        <img src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-01.jpg" alt="Walnut card tray with white powder coated steel divider and 3 punchout holes." class="bg-gray-100 rounded-lg">
+        <img src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-02.jpg" alt="Top down view of walnut card tray with embedded magnets and card groove." class="bg-gray-100 rounded-lg">
+        <img src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-03.jpg" alt="Side of walnut card tray with card groove and recessed card area." class="bg-gray-100 rounded-lg">
+        <img src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-04.jpg" alt="Walnut card tray filled with cards and card angled in dedicated groove." class="bg-gray-100 rounded-lg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- New Arrivals -->
+<section class="text-gray-600 body-font">
+  <div class="container px-5 pt-8 pb-24 mx-auto">
+      <div class="flex w-full my-10 flex-wrap">
+          <h1 class="sm:text-3xl text-2xl font-medium body-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">NEW ARRIVALS</h1>
+          <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
+      </div>
+      <!-- Product Cards -->
+      <div class="flex flex-wrap -m-4">
+        {% for product in new_arrivals %}
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full drop-shadow-md">
+          <a class="block relative h-48 rounded overflow-hidden" href="{{ product.get_absolute_url }}">
+            <img alt="bestseller" class="object-cover object-center w-full h-full block" src="{{ product.image.url }}">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ product.category }}</h3>
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{ product.name }}</h2>
+            <p class="mt-1 text-xs">Short Description of the product if available</p>
+            <div class="flex justify-between items-end mt-4">
+              <div class="text-md font-medium">${{ product.price }}</div>
+              <button class="bg-cyan-600 hover:bg-cyan-800 text-white font-medium py-2 px-4 rounded">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+</section><!-- New Arrivals -->
+{% endblock %}

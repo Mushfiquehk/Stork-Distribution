@@ -1,0 +1,200 @@
+{% extends "./../base.html"%}
+
+{% block styles %}
+<style>
+    #id_email_address {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-sizing: border-box;
+        padding: 1.25px 0px 0.625px 0px;
+        margin: 2px 0px 0px 0px;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid gray;
+        appearance: none;
+        width: 100%;
+        outline: none;
+    }
+    #id_email_address:focus {
+        border-bottom: 2px solid #0891b2;
+    }
+
+    #id_first_name {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-sizing: border-box;
+        padding: 1.25px 0px 0.625px 0px;
+        margin: 2px 0px 0px 0px;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid gray;
+        appearance: none;
+        width: 100%;
+        outline: none;
+    }
+
+    #id_first_name:focus {
+        border-bottom: 2px solid #0891b2;
+    }
+
+    #id_last_name {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-sizing: border-box;
+        padding: 1.25px 0px 0.625px 0px;
+        margin: 2px 0px 0px 0px;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid gray;
+        appearance: none;
+        width: 100%;
+        outline: none;
+    }
+    #id_last_name:focus {
+        border-bottom: 2px solid #0891b2;
+    }
+
+    #id_phone_number {
+        display: block;
+        font-size: 0.875rem;
+        box-sizing: border-box;
+        padding: 1.25px 0px 0.625px 0px;
+        margin: 2px 0px 0px 0px;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid gray;
+        appearance: none;
+        width: 100%;
+        outline: none;
+    }
+    #id_phone_number:focus {
+        border-bottom: 2px solid #0891b2;
+    }
+
+    #id_pickup_time {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-sizing: border-box;
+        padding: 1.250px 0px 0.625px 0px;
+        margin: 2px 0px 0px 0px;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid gray;
+        appearance: none;
+        width: 100%;
+        outline: none;
+    }
+    #id_pickup_time:focus {
+        border-bottom: 2px solid #0891b2;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="bg-gray-100">
+    <div class="container px-8 py-8 mx-auto">
+        <div class="lg:flex lg:flex-row justify-between">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                    <div class="font-medium text-lg uppercase mb-2">Your Cart</div>
+                    <div class="overflow-hidden shadow-md sm:rounded-lg">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                        Name
+                                    </th>
+                                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                        Unit Price
+                                    </th>
+                                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                        Amount
+                                    </th>
+                                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                        Total Price
+                                    </th>
+                                    <th scope="col" class="relative py-3 px-6">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Products -->
+                            {% for item in cart %}
+                            {% with product=item.product %}
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <a class="no-underline hover:underline" href="{{ product.get_absolute_url }}"> {{ product.name }}</a>
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    &dollar; {{ product.price }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    {{ item.amount }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    &dollar; {{ item.total_price }}
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                            {% endwith %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+            </div>
+
+
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                    <!-- Order Confirmation Form -->
+                    <div class="font-medium text-lg uppercase mb-2">Place Your Order</div>
+
+                    <form class="bg-gray-50 dark:bg-gray-700 rounded-lg px-5 pt-9 pb-5 mt-2 text-gray-200" action="{% url "store:cart_summary" %}" method="POST">
+                        {% csrf_token %}
+                        {{ order_form.non_field_errors }}
+                        <div class="relative z-0 mb-6 w-full group fieldWrapper">
+                            {{ order_form.email_address.errors }}                            
+                            {{ order_form.email_address }}
+                            <label for="{{ order_form.email_address.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.email_address.label }}</label>
+                        </div>
+                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                            <div class="relative z-0 mb-6 w-full group">
+                                {{ order_form.first_name.errors }}
+                                {{ order_form.first_name }}
+                                <label for="{{ order_form.first_name.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.first_name.label }}</label>
+                            </div>
+                            <div class="relative z-0 mb-6 w-full group">
+                                {{ order_form.last_name.errors }}
+                                {{ order_form.last_name }}
+                                <label for="{{ order_form.last_name.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.last_name.label }}</label>
+                            </div>
+                        </div>
+                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                            <div class="relative z-0 mb-6 w-full group">
+                                {{ order_form.phone_number.errors }}
+                                {{ order_form.phone_number }}
+                                <label for="{{ order_form.phone_number.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.phone_number.label }}</label>
+                            </div>
+                            <div class="relative z-0 mb-6 w-full group">
+                                {{ order_form.pickup_time.errors }}
+                                {{ order_form.pickup_time }}
+                                <label for="{{ order_form.pickup_time.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.pickup_time.label }}</label>
+                            </div>
+                        </div>
+                        <button class="bg-cyan-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                            Place Order
+                        </button>
+                      </form>
+                </div>
+            </div>
+        </div>        
+     </div>
+</section>
+{% endblock %}
