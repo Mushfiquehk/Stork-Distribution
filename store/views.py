@@ -11,8 +11,8 @@ from store.cart import Cart
 
 def index(request):
 
-    new_arrivals = Product.objects.all()[:4]
-    featured = Product.objects.filter(is_featured=True)[:4]
+    new_arrivals = Product.objects.all()[:6]
+    featured = Product.objects.filter(is_featured=True)[:6]
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -27,12 +27,11 @@ def index(request):
 
             else:
                 # change to JsonResponse to ask new user to register
-                return HttpResponse("Account not active")
+                return HttpResponseRedirect(reverse('store:register'))
 
         else:
-            print("Someone tried to login and failed!")
-            print("Email Address: {} and password: {}".format(username, password))
-            return HttpResponse("Invalid login details")
+            # also change to 
+            return HttpResponseRedirect(reverse('store:register'))
 
     else:
         return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
@@ -53,19 +52,18 @@ def category_list(request, slug):
     categories = Category.objects.all()
     return render(request=request, template_name="store/category_list.html", context={'products': filtered,
                                                                                       'categories': categories})
-
+@login_required
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
     return render(request=request, template_name='store/product_detail.html', context={'product': product})
 
 def cart_summary(request): 
-    cart = Cart(request)
+    cart = Cart(request)    
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid() and bool(cart):
             order_products = []
-
-            # remove whitespace from name as this gets entered into SlugField
             # send notification to customer
             last_name = form.cleaned_data['last_name']
             first_name = form.cleaned_data['first_name']
@@ -98,6 +96,7 @@ def cart_summary(request):
 
     return render(request, 'store/cart.html', {'order_form': form})
 
+@login_required
 def update_cart(request):
     cart = Cart(request)
     if request.POST.get('action') == 'update':

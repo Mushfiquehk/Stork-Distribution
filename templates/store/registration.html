@@ -1,16 +1,51 @@
 {% extends './../base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'store/css/registration_form.css' %}"/>
+{% endblock %}
+
 
 {% block content %}
     {% if registered %}
-        <p>You are registered!</p>
+    <section class="bg-gray-200">
+        <div class="text-lg font-bold text-gray-200 capitalize">You are registered!</p>
+    </section>
     {% else %}
-        <p>Register your business here</p>
-
-        <form enctype="multipart/form-data" method="POST">
+    <section class="bg-gray-100 py-12">
+      <div class="container min-h-full flex justify-center">
+        <form enctype="multipart/form-data" class="bg-gray-700 flex flex-col max-w-lg rounded-lg p-3 text-gray-200" method="POST">
             {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" name="" class="bg-cyan-600 border-2 text-gray-100 rounded-md p-2" value="Register"/>
+            <div class="text-2xl tracking-wide font-bold self-center capitalize mb-3">Register your business</div>
+            {{ user_form.non_field_errors }}
+            <div class="w-full group flex flex-row items-center justify-stretch pt-5 pb-3">
+                <label for="{{ user_form.username.id_for_label }}" class="text-gray-200 font-medium min-w-max">Company Name:</label>
+                {{ user_form.username.errors }}
+                {{ user_form.username }}
+            </div>
+            <div class="w-full group flex flex-row items-center justify-between pb-3">
+                <label for="{{ user_form.email.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ user_form.email.label }}:</label>
+                {{ user_form.email.errors }}
+                {{ user_form.email }}
+            </div>
+            <div class="w-full group flex flex-row items-center justify-between pb-3">
+                <label for="{{ user_form.password.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ user_form.password.label }}:</label>
+                {{ user_form.password.errors }}
+                {{ user_form.password }}
+            </div>
+            <div class="w-full group flex flex-row items-center justify-between pb-3">
+                <label for="{{ profile_form.company_website.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ profile_form.company_website.label }}:</label>
+                {{ profile_form.company_website.errors }}
+                {{ profile_form.company_website }}
+            </div>
+            <div class="w-full group flex flex-row items-center justify-between">
+                <label for="{{ profile_form.business_proof.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ profile_form.business_proof.label }}:</label>
+                {{ profile_form.business_proof.errors }}
+                {{ profile_form.business_proof }}
+            </div>
+            <input type="submit" name="" class="text-white self-center bg-cyan-600 border-0 py-2 mt-3 px-6 focus:outline-none hover:bg-cyan-800 rounded text-lg font-medium" value="Register"/>
         </form>
+      </div>
+    </section>
     {% endif %}
 {% endblock %}

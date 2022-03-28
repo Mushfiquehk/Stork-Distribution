@@ -1,0 +1,117 @@
+#id_email {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    box-sizing: border-box;
+    padding: 1.25px 0px 0.625px 0px;
+    margin: 2px 0px 0px 0px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_email:focus {
+    border-bottom: 2px solid #0891b2;
+}
+
+#id_password {
+    display: block;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    padding: 1.25px 0px 0.625px 0px;
+    margin: 2px 0px 0px 0px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_password:focus {
+    border-bottom: 2px solid #0891b2;
+}
+
+#id_last_name {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    box-sizing: border-box;
+    padding: 1.25px 0px 0.625px 0px;
+    margin: 2px 0px 0px 0px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_last_name:focus {
+    border-bottom: 2px solid #0891b2;
+}
+
+#id_phone_number {
+    display: block;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    padding: 1.25px 0px 0.625px 0px;
+    margin: 2px 0px 0px 0px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_phone_number:focus {
+    border-bottom: 2px solid #0891b2;
+}
+
+#id_username {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_username:focus {
+    border-bottom: 2px solid #0891b2;
+}
+
+#id_business_proof {
+    display: block;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_business_proof:focus {
+    border-bottom: 2px solid #0891b2;
+}
+
+#id_company_website {
+    display: block;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    padding: 1.25px 0px 0.625px 0px;
+    margin: 2px 0px 0px 0px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    appearance: none;
+    width: 100%;
+    outline: none;
+}
+#id_company_website:focus {
+    border-bottom: 2px solid #0891b2;
+}
