@@ -4,16 +4,29 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 
-from store.models import Product, Category, Order, OrderItem, UserProfile
+from store.models import Product, Category, Order, OrderItem, Announcement
 from store.forms import OrderForm, UserForm, UserProfileForm
 from store.cart import Cart
 
 def index(request):
 
-    new_arrivals = Product.objects.all()[:6]
-    featured = Product.objects.filter(is_featured=True)[:6]
+    new_arrivals = Product.objects.all()[:8]
+    featured = Product.objects.filter(is_featured=True)[:8]
+    announcements = Announcement.objects.all()
+    categories = Category.objects.all()
+
+    first = announcements[0]
+    second = announcements[1]
     
+    return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
+                                                                        'featured': featured,
+                                                                        'first': first,
+                                                                        'second': second,
+                                                                        'categories': categories})
+
+def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -34,15 +47,21 @@ def index(request):
             return HttpResponseRedirect(reverse('store:register'))
 
     else:
-        return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
-                                                                            'featured': featured})
+        return render(request=request, template_name="store/login.html", context={})
 
 @login_required
 def shop(request):
     categories = Category.objects.all()
     products = Product.objects.all()
+
+    paginator = Paginator(products, 25)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
     return render(request=request, template_name="store/product_list.html", context={'categories': categories, 
-                                                                                     'products': products})
+                                                                                     'products': products,
+                                                                                     'page_obj': page_obj})
 
 """ Invoked by get_absolute_url method for Category """
 @login_required
@@ -50,8 +69,14 @@ def category_list(request, slug):
     category = get_object_or_404(Category, slug=slug)
     filtered = Product.objects.filter(category=category)
     categories = Category.objects.all()
+
+    paginator = Paginator(filtered, 25)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request=request, template_name="store/category_list.html", context={'products': filtered,
-                                                                                      'categories': categories})
+                                                                                      'categories': categories,
+                                                                                      'page_obj': page_obj})
 @login_required
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
@@ -160,3 +185,6 @@ def register(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('store:home'))
+
+def contact(request):
+    return render(request, template_name="contact.html")

@@ -1,5 +1,4 @@
 {% extends './../base.html' %}
-{% load static %}
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'store/css/registration_form.css' %}"/>
@@ -12,11 +11,11 @@
         <div class="text-lg font-bold text-gray-200 capitalize">You are registered!</p>
     </section>
     {% else %}
-    <section class="bg-gray-100 py-12">
-      <div class="container min-h-full flex justify-center">
+    <section class="text-gray-600 bg-white body-font shadow-md min-h-full">
+      <div class="container mx-auto flex py-12 md:flex-row flex-col items-center">
         <form enctype="multipart/form-data" class="bg-gray-700 flex flex-col max-w-lg rounded-lg p-3 text-gray-200" method="POST">
             {% csrf_token %}
-            <div class="text-2xl tracking-wide font-bold self-center capitalize mb-3">Register your business</div>
+            <div class="text-2xl tracking-wide font-bold self-center capitalize py-2 mb-3">Register your business</div>
             {{ user_form.non_field_errors }}
             <div class="w-full group flex flex-row items-center justify-stretch pt-5 pb-3">
                 <label for="{{ user_form.username.id_for_label }}" class="text-gray-200 font-medium min-w-max">Company Name:</label>

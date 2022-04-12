@@ -13,6 +13,7 @@ class Category(models.Model):
     category_code = models.CharField(max_length=3, unique=True)
     category_id = models.CharField(max_length=2, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
+    image = models.ImageField(upload_to="category_images/", default="vendor_images/default.png")
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -106,3 +107,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Announcement(models.Model):
+    description = models.CharField(max_length=255)
+    image = models.ImageField(upload_to="announcements/", default="vendor_images/default.png")
