@@ -9,43 +9,79 @@
 {% block content %}
     {% if registered %}
     <section class="bg-gray-200">
-        <div class="text-lg font-bold text-gray-200 capitalize">You are registered!</p>
+        <div class="text-lg font-bold rounded text-gray-200 capitalize">You are registered!</p>
     </section>
     {% else %}
-    <section class="text-gray-600 bg-white body-font shadow-md min-h-full">
-      <div class="container mx-auto flex py-12 md:flex-row flex-col items-center">
-        <form enctype="multipart/form-data" class="bg-gray-700 flex flex-col max-w-lg rounded-lg p-3 text-gray-200" method="POST">
+    <section class="flex flex-col mx-auto py-12 px-4 max-w-lg body-font min-h-full">
+
+        <div class="text-2xl tracking-wide font-bold capitalize py-2 mb-3">Create Business Profile</div>
+        <form enctype="multipart/form-data" class="block" method="POST">
             {% csrf_token %}
-            <div class="text-2xl tracking-wide font-bold self-center capitalize py-2 mb-3">Register your business</div>
+            
             {{ user_form.non_field_errors }}
-            <div class="w-full group flex flex-row items-center justify-stretch pt-5 pb-3">
-                <label for="{{ user_form.username.id_for_label }}" class="text-gray-200 font-medium min-w-max">Company Name:</label>
-                {{ user_form.username.errors }}
-                {{ user_form.username }}
+            <div class="md:flex md:justify-between md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label for="{{ user_form.username.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                        Company Name
+                    </label>                
+                </div>
+                <div class="md:w-2/3">
+                    {{ user_form.username.errors }}
+                    {{ user_form.username }}
+                </div>
             </div>
-            <div class="w-full group flex flex-row items-center justify-between pb-3">
-                <label for="{{ user_form.email.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ user_form.email.label }}:</label>
-                {{ user_form.email.errors }}
-                {{ user_form.email }}
+            
+            <div class="md:flex md:justify-between md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label for="{{ user_form.email.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                        {{ user_form.email.label }}
+                    </label>                
+                </div>
+                <div class="md:w-2/3">
+                    {{ user_form.email.errors }}
+                    {{ user_form.email }}
+                </div>
             </div>
-            <div class="w-full group flex flex-row items-center justify-between pb-3">
-                <label for="{{ user_form.password.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ user_form.password.label }}:</label>
-                {{ user_form.password.errors }}
-                {{ user_form.password }}
+           
+            <div class="md:flex md:justify-between md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label for="{{ user_form.password.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                        {{ user_form.password.label }}
+                    </label>
+                </div>
+                <div class="md:w-2/3">
+                    {{ user_form.password.errors }}
+                    {{ user_form.password }}
+                </div>
             </div>
-            <div class="w-full group flex flex-row items-center justify-between pb-3">
-                <label for="{{ profile_form.company_website.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ profile_form.company_website.label }}:</label>
-                {{ profile_form.company_website.errors }}
-                {{ profile_form.company_website }}
+           
+            <div class="md:flex md:justify-between md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label for="{{ profile_form.business_proof.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                        Resale Certification (optional)
+                    </label>
+                </div>
+                <div class="md:w-2/3">
+                    {{ profile_form.business_proof.errors }}
+                    {{ profile_form.business_proof }}
+                </div>
             </div>
-            <div class="w-full group flex flex-row items-center justify-between">
-                <label for="{{ profile_form.business_proof.id_for_label }}" class="text-gray-200 capitalize font-medium">{{ profile_form.business_proof.label }}:</label>
-                {{ profile_form.business_proof.errors }}
-                {{ profile_form.business_proof }}
+
+            
+            <div class="md:flex md:justify-between md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label for="{{ profile_form.company_website.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                        Social Media/Website (optional)
+                    </label>
+                </div>
+                <div class="md:w-2/3">
+                    {{ profile_form.company_website.errors }}
+                    {{ profile_form.company_website }}
+                </div>
             </div>
+            
             <input type="submit" name="" class="text-white self-center bg-cyan-600 border-0 py-2 mt-3 px-6 focus:outline-none hover:bg-cyan-800 rounded text-lg font-medium" value="Register"/>
         </form>
-      </div>
     </section>
     {% endif %}
 {% endblock %}

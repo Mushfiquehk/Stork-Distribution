@@ -3,7 +3,7 @@ from decimal import Decimal
 
 class Cart():
     """
-    A base Cart class
+    Cart to store ids of items added to cart during a session
     """
     def __init__(self, request):
         self.session = request.session
@@ -18,10 +18,9 @@ class Cart():
         """
         product_id = str(product.id)
 
-        if product_id not in self.cart:
-            self.cart[product_id] = {'price': str(product.price),
-                                     'amount': amount,}
-                                    
+        self.cart[product_id] = {'price': str(product.price),
+                                 'amount': amount,}
+
         self.session.modified = True
 
     def delete(self, product_id):

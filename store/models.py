@@ -67,7 +67,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=255)
     # change below to DateTimeField and then change in OrderForm in forms.py
     pickup_time = models.CharField(max_length=255)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{10,11}$', message="Phone number must be entered in the format: '999999999'")
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{10,11}$', message="Phone number must be entered in the format: '1234567890'")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, default="9999999999")
     email = models.EmailField(max_length=254, blank=True)
     products = models.ManyToManyField(

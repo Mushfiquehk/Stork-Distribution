@@ -82,6 +82,21 @@ def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
     return render(request=request, template_name='store/product_detail.html', context={'product': product})
 
+
+@login_required
+def order_summary(request, pk):
+    order = get_object_or_404(Order, id=pk)
+    last_name = order.last_name
+
+    products = list(order.products.all())
+
+    # send OrderItems objects for quantity
+    # order_items = get_object_or_404(OrderItem, order=order)
+
+    return render(request, 'store/order_summary.html', context={'last_name': last_name,
+                                                                'products': products})   
+
+
 def cart_summary(request): 
     cart = Cart(request)    
 
@@ -114,12 +129,13 @@ def cart_summary(request):
 
             cart.empty()
 
-            return HttpResponseRedirect(reverse('order_summary', ars=[order_id]))
+            return HttpResponseRedirect(reverse('store:order_summary', args=[order_id]))
 
     else:
         form = OrderForm()
 
     return render(request, 'store/cart.html', {'order_form': form})
+
 
 @login_required
 def update_cart(request):
@@ -138,10 +154,6 @@ def update_cart(request):
     response = JsonResponse({'items': len(cart), 'cart_total':  cart_total})
     return response
 
-@login_required
-def order_summary(request, pk):
-    last_name = get_object_or_404(Order, id=pk).last_name
-    return render(request, 'store/order_summary.html', context={'last_name': last_name})         
 
 def register(request):
 

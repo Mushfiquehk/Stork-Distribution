@@ -2,16 +2,14 @@
 {% block content %}
 
 <!-- Discounts -->
-<div class="h-14 bg-orange-600 px-4 py-3 rounded-b-lg text-gray-900">
-  <p class="text-xs tracking-wide font-medium text-center">
-    Announcements and Discounts shown here
-  </p>
+<div style="background: #eee758"class="border-b-2 border-t-2 border-gray-900 py-2 text-sm tracking-wide font-medium text-center">
+  Announcements and Discounts here
 </div>
 
 <!-- Announcements -->
 <section class="bg-gray-700">
-  <div class="container min-w-full mx-auto">
-    <img alt="{{ first.description }}" class="object-cover object-center w-fit block" src="{{ first.image.url }}">
+  <div class="container min-w-full">
+    <img alt="{{ first.description }}" class="object-cover object-center w-fit" src="{{ first.image.url }}">
   </div>
 </section>
 
@@ -20,13 +18,11 @@
   <div class="container mx-auto py-8 px-4">
     <div class="w-full flex-wrap">
       <h1 class="text-3xl font-bold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Collections</h1>
-      <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
-    </div>
-    <div class="flex flex-wrap justify-between mt-5 sm:mx-8">
+    <div class="grid grid-cols-2 gap-2 mt-4 lg:grid-cols-4">
       {% for category in categories %}
-      <div class="w-44 h-44 mb-10">
-        <img class="bg-gray-700 rounded-lg shadow-lg object-cover object-center w-full h-full" src="{{ category.image.url }}"> 
-        <p class="mt-2 text-center text-gray-500">{{ category.name }}</p>
+      <div class="w-40 mb-10 shadow-md">
+        <img class="bg-gray-700 rounded-lg object-cover object-center w-full h-full" src="{{ category.image.url }}"> 
+        <p class="mt-2 font-bold text-md text-center text-gray-500">{{ category.name }}</p>
       </div>
       {% endfor %}
     </div>
@@ -42,21 +38,29 @@
             <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
         </div>
         <!-- Product Cards -->
-        <div class="flex flex-wrap justify-between px-2 sm:mx-8">
+        <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
           {% for product in featured %}
-          <div class="flex flex-col justify-between content-start py-2 w-40 h-40">
-            <a class="block relative rounded overflow-hidden" href="{{ product.get_absolute_url }}">
-              <img alt="bestseller" class="object-cover object-center w-full h-full block" src="{{ product.image.url }}">
+          <div class="flex flex-col justify-between content-start py-4 px-4 shadow-md rounded-lg">
+            <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}">
+              <img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}">
             </a>
-            <div class="mt-2">
-              <h3 class="text-gray-500 text-xs tracking-widest title-font">{{ product.category }}</h3>
-              <h2 class="text-gray-900 body-font text-md font-medium leading-4">{{ product.name }}</h2>
+
+            <div class="my-2">
+              <h3 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
+              <h2 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
+              <p class="my-1 text-xs">Short Description of the product if available</p>
             </div>
-            <div class="justify-self-end">
-              <p class="mt-1 text-xs">Short Description of the product if available</p>
-              <div class="flex justify-items-end items-end mt-4">
-                <a href="{{ product.get_absolute_url }}" class="bg-cyan-600 hover:bg-cyan-800 text-white font-medium py-2 px-4 rounded-md">View Product</a>
-              </div>
+
+            <div class="justify-self-end mt-4">
+              {% if user.is_authenticated %}
+                <a href="{{ product.get_absolute_url }}" class="no-underline">
+                  <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
+                </a>
+              {%else %}
+                <a href="{% url 'store:login' %}" class="no-underline">
+                  <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
+                </a>
+              {% endif %}
             </div>
           </div>
           {% endfor %}
@@ -67,9 +71,9 @@
 
 <!-- Banner -->
 <section class="bg-gray-900">
-  <div class="container md:flex justify-center mx-auto">
-    <img alt="{{ second.description }}" class="object-cover object-center w-full h-64 block" src="{{ second.image.url }}">
-    <img alt="{{ second.description }}" class="object-cover object-center w-full h-64 block" src="{{ second.image.url }}">
+  <div class="container md:flex justify-between mx-auto">
+    <img alt="{{ second.description }}" class="object-cover object-center h-64 w-full" src="{{ second.image.url }}">
+    <img alt="{{ second.description }}" class="object-cover object-center w-full h-64" src="{{ second.image.url }}">
   </div>
 </section>
 
@@ -83,22 +87,22 @@
   
         <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
           <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-gray-200">Size</dt>
+            <dt class="font-medium text-lg text-gray-200">Size</dt>
             <dd class="mt-2 text-sm text-gray-400">All our available sizes.</dd>
           </div>
   
           <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-gray-200">Material</dt>
+            <dt class="font-medium text-lg text-gray-200">Material</dt>
             <dd class="mt-2 text-sm text-gray-400">List of materials available to choose from.</dd>
           </div>
   
           <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-gray-200">Dimensions</dt>
+            <dt class="font-medium text-lg text-gray-200">Dimensions</dt>
             <dd class="mt-2 text-sm text-gray-400">6.25&quot; x 3.55&quot; x 1.15&quot;</dd>
           </div>
   
           <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-gray-200">Finish</dt>
+            <dt class="font-medium text-lg text-gray-200">Finish</dt>
             <dd class="mt-2 text-sm text-gray-400">Crafted to your needs.</dd>
           </div>
 
@@ -116,27 +120,36 @@
 
 <!-- New Arrivals -->
 <section class="text-gray-600 body-font">
-  <div class="container mx-auto py-8 px-4">
+  <div class="container mx-auto py-8 px-4 sm:px-0">
       <div class="w-full flex-wrap">
-          <h1 class="sm:text-3xl text-2xl font-bold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
-          <p class="lg:pl-6 lg:w-2/3 mx-auto leading2relaxed text-base"></p>
+        <h1 class="sm:text-3xl text-2xl font-bold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
+        <p class="lg:pl-6 lg:w-2/3 mx-auto leading2relaxed text-base"></p>
       </div>
       <!-- Product Cards -->
-      <div class="flex flex-wrap justify-between px-4 sm:mx-8">
+      <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
         {% for product in new_arrivals %}
-        <div class="flex flex-col justify-between content-start py-2 w-40 h-40">
-          <a class="block relative rounded overflow-hidden" href="{{ product.get_absolute_url }}">
-            <img alt="bestseller" class="object-cover object-center w-full h-full block" src="{{ product.image.url }}">
+        <div class="flex flex-col justify-between content-center py-4 px-4 shadow-md rounded-lg">
+          
+          <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}">
+            <img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}">
           </a>
-          <div class="mt-2">
-            <h3 class="text-gray-500 text-xs tracking-widest title-font">{{ product.category }}</h3>
-            <h2 class="text-gray-900 body-font text-md font-medium leading-4">{{ product.name }}</h2>
+
+          <div class="my-2">
+            <h3 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
+            <h2 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
+            <p class="my-1 text-xs">Short Description of the product if available</p>
           </div>
-          <div class="justify-self-end">
-            <p class="mt-1 text-xs">Short Description of the product if available</p>
-            <div class="mt-4">
-              <a href="{{ product.get_absolute_url }}" class="bg-cyan-600 hover:bg-cyan-800 text-white font-medium py-2 px-4 rounded-md w-full">View Product</a>
-            </div>
+
+          <div class="justify-self-end mt-4">
+            {% if user.is_authenticated %}
+              <a href="{{ product.get_absolute_url }}" class="no-underline">
+                <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
+              </a>
+            {%else %}
+              <a href="{% url 'store:login' %}" class="no-underline">
+                <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
+              </a>
+            {% endif %}
           </div>
         </div>
         {% endfor %}

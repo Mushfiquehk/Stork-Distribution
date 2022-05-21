@@ -1,8 +1,12 @@
 from re import L
 from django.contrib import admin
-from store.models import Category, Product, Vendor, Order, UserProfile, Announcement
+from store.models import Category, Product, Vendor, Order, UserProfile, Announcement, OrderItem
 
 # Register your models here.
+
+admin.site.register(UserProfile)
+
+
 @admin.register(Category)
 class Category(admin.ModelAdmin):
     list_display = ['name', 'category_code', 'category_id', 'slug']
@@ -18,9 +22,16 @@ class Vendor(admin.ModelAdmin):
 
 @admin.register(Order)
 class Order(admin.ModelAdmin):
-    list_display = ['last_name', 'email']
+    list_display = ['first_name', 'last_name', 'phone_number', 'is_active']
 
-admin.site.register(UserProfile)
+@admin.register(OrderItem)
+class OrderItem(admin.ModelAdmin):
+    list_display = ['order_name', 'product_name', 'price', 'amount']
+
+    def order_name(self, instance):
+        return instance.order
+    def product_name(self, instance):
+        return instance.product
 
 @admin.register(Announcement)
 class Announcement(admin.ModelAdmin):
