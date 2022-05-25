@@ -10,7 +10,7 @@
         <div class="lg:flex justify-between items-stretch">
             <div class="overflow-x-auto lg:mr-6 grow">
                 <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-                    <div class="title-font tracking-wider font-medium text-xl uppercase">Cart</div>
+                    <div class="title-font tracking-wider font-bold text-xl uppercase">Cart</div>
 
                     <div>
                         {% for item in cart %}
@@ -43,41 +43,78 @@
             <div class="overflow-x-auto lg:ml-6 grow">
                 <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
                     <!-- Order Confirmation Form -->
-                    <div class="title-font font-medium text-xl uppercase">Order Confirmation</div>
+                    <div class="title-font font-bold text-xl uppercase">Order Confirmation</div>
                     <form class="flex flex-col rounded-lg mt-8" action="{% url "store:cart_summary" %}" method="POST">
                         {% csrf_token %}
                         {{ order_form.non_field_errors }}
-                        <div class="relative z-0 mb-6 w-full group fieldWrapper">
-                            {{ order_form.email_address.errors }}                            
-                            {{ order_form.email_address }}
-                            <label for="{{ order_form.email_address.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-400 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.email_address.label }}</label>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 xl:gap-6 fieldWrapper">
-                            <div class="relative z-0 mb-6 w-full group">
-                                {{ order_form.first_name.errors }}
-                                {{ order_form.first_name }}
-                                <label for="{{ order_form.first_name.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.first_name.label }}</label>
+                        <!-- Email Address-->
+                        <div class="grid grid-cols-1 mb-4">
+                            <div class="">
+                                <label for="{{ order_form.email_address.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                    Email Address
+                                </label>                
                             </div>
-                            <div class="relative z-0 mb-6 w-full group">
-                                {{ order_form.last_name.errors }}
-                                {{ order_form.last_name }}
-                                <label for="{{ order_form.last_name.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.last_name.label }}</label>
+                            <div class="">
+                                {{ order_form.email_address.errors }}                           
+                                {{ order_form.email_address }}
                             </div>
                         </div>
-                        <div class="relative z-0 mb-6 w-full group">
-                            {{ order_form.phone_number.errors }}
-                            {{ order_form.phone_number }}
-                            <label for="{{ order_form.phone_number.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.phone_number.label }}</label>
-                        </div>                    
-                        <div class="relative z-0 mb-6 w-full group">
-                            {{ order_form.pickup_time.errors }}
-                            {{ order_form.pickup_time }}
-                            <label for="{{ order_form.pickup_time.id_for_label }}" class="absolute text-md font-medium capitalize text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ order_form.pickup_time.label }}</label>
+
+                        <div class="grid grid-cols-2 gap-2 fieldWrapper">
+                            <!-- First Name -->
+                            <div class="grid grid-cols-1 mb-4">
+                                <div class="">
+                                    <label for="{{ order_form.last_name.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                        {{ order_form.first_name.label }}
+                                    </label>                
+                                </div>
+                                <div class="">
+                                    {{ order_form.first_name.errors }}
+                                    {{ order_form.first_name }}
+                                </div>
+                            </div>
+                            <!-- Last Name -->
+                            <div class="grid grid-cols-1 mb-4">
+                                <div class="">
+                                    <label for="{{ order_form.last_name.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                        {{ order_form.last_name.label }}
+                                    </label>                
+                                </div>
+                                <div class="">
+                                    {{ order_form.last_name.errors }}
+                                    {{ order_form.last_name }}
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="grid grid-cols-1 mb-4">
+                            <div class="">
+                                <label for="{{ order_form.phone_number.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                    {{ order_form.phone_number.label }}
+                                </label>                
+                            </div>
+                            <div class="">
+                                {{ order_form.phone_number.errors }}
+                                {{ order_form.phone_number }}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 mb-4">
+                            <div class="">
+                                <label for="{{ order_form.pickup_time.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                    {{ order_form.pickup_time.label }}
+                                </label>                
+                            </div>
+                            <div class="">
+                                {{ order_form.pickup_time.errors }}
+                                {{ order_form.pickup_time }}
+                            </div>
+                        </div>     
                         <button class="bg-cyan-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit self-center" type="submit">
                             Confirm Order
                         </button>
-                      </form>
+
+                    </form>
                 </div>
             </div>
         </div>        

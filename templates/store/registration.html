@@ -12,75 +12,76 @@
         <div class="text-lg font-bold rounded text-gray-200 capitalize">You are registered!</p>
     </section>
     {% else %}
-    <section class="flex flex-col mx-auto py-12 px-4 max-w-lg body-font min-h-full">
+    <section class="flex flex-col mx-auto py-4 px-4 max-w-2xl body-font min-h-full">
 
-        <div class="text-2xl tracking-wide font-bold capitalize py-2 mb-3">Create Business Profile</div>
-        <form enctype="multipart/form-data" class="block" method="POST">
+        <div class="text-2xl tracking-wide font-bold capitalize">Create Business Profile</div>
+        <p class="font-medium text-gray-500">Register your business with us to start shopping</p>
+        <p class="font-medium text-gray-500 mb-6">Please fill out the form below and check email inbox for confirmation</p>
+        <form enctype="multipart/form-data" class="" method="POST">
             {% csrf_token %}
             
             {{ user_form.non_field_errors }}
-            <div class="md:flex md:justify-between md:items-center mb-6">
-                <div class="md:w-1/3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
+                <div class="">
                     <label for="{{ user_form.username.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         Company Name
                     </label>                
                 </div>
-                <div class="md:w-2/3">
+                <div class="">
                     {{ user_form.username.errors }}
                     {{ user_form.username }}
                 </div>
             </div>
             
-            <div class="md:flex md:justify-between md:items-center mb-6">
-                <div class="md:w-1/3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
+                <div class="">
                     <label for="{{ user_form.email.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         {{ user_form.email.label }}
                     </label>                
                 </div>
-                <div class="md:w-2/3">
+                <div class="">
                     {{ user_form.email.errors }}
                     {{ user_form.email }}
                 </div>
             </div>
            
-            <div class="md:flex md:justify-between md:items-center mb-6">
-                <div class="md:w-1/3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
+                <div class="">
                     <label for="{{ user_form.password.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         {{ user_form.password.label }}
                     </label>
                 </div>
-                <div class="md:w-2/3">
+                <div class="">
                     {{ user_form.password.errors }}
                     {{ user_form.password }}
                 </div>
             </div>
            
-            <div class="md:flex md:justify-between md:items-center mb-6">
-                <div class="md:w-1/3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
+                <div class="">
                     <label for="{{ profile_form.business_proof.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         Resale Certification (optional)
                     </label>
                 </div>
-                <div class="md:w-2/3">
+                <div class="">
                     {{ profile_form.business_proof.errors }}
                     {{ profile_form.business_proof }}
                 </div>
             </div>
-
             
-            <div class="md:flex md:justify-between md:items-center mb-6">
-                <div class="md:w-1/3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
+                <div class="">
                     <label for="{{ profile_form.company_website.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         Social Media/Website (optional)
                     </label>
                 </div>
-                <div class="md:w-2/3">
+                <div class="">
                     {{ profile_form.company_website.errors }}
                     {{ profile_form.company_website }}
                 </div>
             </div>
             
-            <input type="submit" name="" class="text-white self-center bg-cyan-600 border-0 py-2 mt-3 px-6 focus:outline-none hover:bg-cyan-800 rounded text-lg font-medium" value="Register"/>
+            <input type="submit" name="" class="block self-end text-white bg-cyan-600 border-0 py-2 mt-3 px-6 focus:outline-none hover:bg-cyan-800 rounded text-lg font-medium" value="Register"/>
         </form>
     </section>
     {% endif %}
