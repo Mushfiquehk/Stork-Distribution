@@ -193,6 +193,3 @@ def register(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('store:home'))
-
-def contact(request):
-    return render(request, template_name="contact.html")
