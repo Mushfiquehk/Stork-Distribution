@@ -59,25 +59,25 @@
            
             <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
                 <div class="">
-                    <label for="{{ profile_form.business_proof.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                    <label for="{{ profile_form.certificates.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         Resale Certification (optional)
                     </label>
                 </div>
                 <div class="">
-                    {{ profile_form.business_proof.errors }}
-                    {{ profile_form.business_proof }}
+                    {{ profile_form.certificates.errors }}
+                    {{ profile_form.certificates }}
                 </div>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 mb-4">
                 <div class="">
-                    <label for="{{ profile_form.company_website.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                        Social Media/Website (optional)
+                    <label for="{{ profile_form.website.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                        Website/Social Media (optional)
                     </label>
                 </div>
                 <div class="">
-                    {{ profile_form.company_website.errors }}
-                    {{ profile_form.company_website }}
+                    {{ profile_form.website.errors }}
+                    {{ profile_form.website }}
                 </div>
             </div>
             

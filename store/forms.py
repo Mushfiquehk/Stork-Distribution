@@ -18,4 +18,4 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta():
         model = UserProfile 
-        fields = ('company_website', 'business_proof')
+        fields = ('website', 'certificates')

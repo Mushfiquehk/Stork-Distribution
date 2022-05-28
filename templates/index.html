@@ -1,15 +1,17 @@
 {% extends "./base.html" %}
+{% load static %}
+
 {% block content %}
 
 <!-- Discounts -->
-<div style="background: #eee758"class="border-b-2 border-t-2 border-gray-900 py-2 text-sm tracking-wide font-medium text-center">
+<div style="background: #eee758"class="border-1 border-gray-900 py-2 text-sm tracking-wide font-medium text-center">
   Announcements and Discounts here
 </div>
 
 <!-- Announcements -->
 <section class="bg-gray-700">
   <div class="container min-w-full">
-    <img alt="{{ first.description }}" class="object-cover object-center w-fit" src="{{ first.image.url }}">
+    <img alt="store" class="object-cover object-center w-fit" src="{% static 'home_images/banner.png' %}">
   </div>
 </section>
 
@@ -72,8 +74,8 @@
 <!-- Banner -->
 <section class="bg-gray-900">
   <div class="container md:flex justify-between mx-auto">
-    <img alt="{{ second.description }}" class="object-cover object-center h-64 w-full" src="{{ second.image.url }}">
-    <img alt="{{ second.description }}" class="object-cover object-center w-full h-64" src="{{ second.image.url }}">
+    <img alt="products" class="object-cover object-center h-64 w-full" src="{% static 'home_images/left.png' %}">
+    <img alt="products" class="object-cover object-center w-full h-64" src="{% static 'home_images/right.png' %}">
   </div>
 </section>
 
@@ -109,10 +111,10 @@
         </dl>
       </div>
       <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-        <img src="https://cdn.shopify.com/s/files/1/2612/8356/files/custom_branding_concentrate.jpg?v=1631132616" alt="Walnut card tray with white powder coated steel divider and 3 punchout holes." class="bg-gray-100 rounded-lg">
-        <img src="https://cdn.shopify.com/s/files/1/0039/0574/9105/products/custom-cbd-hemp-oil-bottle-box-vape-juice-bottle-boxes-custom-packaging-marijuana-packaging-261725_500x.jpg?v=1593787966" alt="Top down view of walnut card tray with embedded magnets and card groove." class="bg-gray-100 rounded-lg">
-        <img src="https://cdn.shopify.com/s/files/1/0039/0574/9105/products/flip-top-style-vape-tank-cartridge-box-custom-packaging-marijuana-packaging-364360_500x.jpg?v=1593797080" alt="Side of walnut card tray with card groove and recessed card area." class="bg-gray-100 rounded-lg">
-        <img src="https://cdn.shopify.com/s/files/1/0039/0574/9105/products/custom-cannabis-flower-smell-proof-mylar-bag-custom-packaging-marijuana-packaging-208187_500x.jpg?v=1593767840" alt="Walnut card tray filled with cards and card angled in dedicated groove." class="bg-gray-100 rounded-lg">
+        <img src="{% static 'custom_images/custom_branding_concentrate.png' %}" alt="Custom-made concentrate box" class="bg-gray-100 rounded-lg">
+        <img src="{% static 'custom_images/custom_cartridge_box.png' %}" alt="A flip top custom made cartridge box" class="bg-gray-100 rounded-lg">
+        <img src="{% static 'custom_images/custom_droper.png' %}" alt="Custom-made fropper and container" class="bg-gray-100 rounded-lg">
+        <img src="{% static 'custom_images/custom_mylar_bag.png' %}" alt="Custom-made mylar bag" class="bg-gray-100 rounded-lg">
       </div>
     </div>
   </div>

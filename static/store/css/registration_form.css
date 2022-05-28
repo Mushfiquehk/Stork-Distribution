@@ -3,8 +3,8 @@
 #id_last_name,
 #id_phone_number,
 #id_username,
-#id_business_proof,
-#id_company_website {
+#id_certificates,
+#id_website {
     width: 100%;
     padding: 0.5rem 0 0.5rem 0;
     line-height: 1.25rem;
@@ -21,8 +21,8 @@
 #id_last_name:focus,
 #id_phone_number:focus,
 #id_username:focus,
-#id_business_proof:focus,
-#id_company_website:focus {
+#id_certificates:focus,
+#id_website:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
     border-color: rgb(8 145 178);

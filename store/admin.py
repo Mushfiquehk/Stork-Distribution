@@ -13,8 +13,8 @@ class Category(admin.ModelAdmin):
 
 @admin.register(Product)
 class Product(admin.ModelAdmin):
-    list_display = ['name', 'product_code', 'category', 'vendor', 'price', 'deal_price', 'is_featured']
-    list_editable = ['price', 'deal_price', 'is_featured',]
+    list_display = ['name', 'product_code', 'category', 'vendor', 'price', 'retail',]
+    list_editable = ['price', 'retail',]
 
 @admin.register(Vendor)
 class Vendor(admin.ModelAdmin):
@@ -22,17 +22,22 @@ class Vendor(admin.ModelAdmin):
 
 @admin.register(Order)
 class Order(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'phone_number', 'is_active']
+    list_display = ['name', 'phone_number', 'is_active']
 
 @admin.register(OrderItem)
 class OrderItem(admin.ModelAdmin):
     list_display = ['order_name', 'product_name', 'price', 'amount']
+    list_filter = ('order__name',)
 
     def order_name(self, instance):
         return instance.order
     def product_name(self, instance):
         return instance.product
 
+
+
 @admin.register(Announcement)
 class Announcement(admin.ModelAdmin):
     list_display = ['description', 'image']
+
+admin.site.site_header = 'Stork Backstore'

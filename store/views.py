@@ -13,7 +13,7 @@ from store.cart import Cart
 def index(request):
 
     new_arrivals = Product.objects.all()[:8]
-    featured = Product.objects.filter(is_featured=True)[:8]
+    featured = Product.objects.all()[:8]
     announcements = Announcement.objects.all()
     categories = Category.objects.all()
 
@@ -96,8 +96,9 @@ def order_summary(request, pk):
 
 def cart_summary(request): 
     cart = Cart(request)    
+    user = request.user
 
-    if request.method == 'POST':
+    if request.method == 'POST' and user.is_authenticated:
         form = OrderForm(request.POST)
         if form.is_valid() and bool(cart):
             order_products = []
@@ -105,12 +106,10 @@ def cart_summary(request):
             last_name = form.cleaned_data['last_name']
             first_name = form.cleaned_data['first_name']
             email_address = form.cleaned_data['email_address']
-            pickup_time = form.cleaned_data['pickup_time']
             phone_number = form.cleaned_data['phone_number']
 
             order = Order(email=email_address, phone_number=phone_number,
-                          last_name=last_name, first_name=first_name, 
-                          pickup_time=pickup_time)
+                          name=user,)
             order.save()
             order_id = order.id
 
@@ -170,8 +169,8 @@ def register(request):
             profile.user = user
 
             # remove this, or use to store something useful
-            if 'business_proof' in request.FILES:
-                profile.business_proof = request.FILES['business_proof']
+            if 'certificates' in request.FILES:
+                profile.certificates = request.FILES['certificates']
 
             profile.save()
 
