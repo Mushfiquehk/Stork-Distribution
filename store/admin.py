@@ -22,7 +22,7 @@ class Vendor(admin.ModelAdmin):
 
 @admin.register(Order)
 class Order(admin.ModelAdmin):
-    list_display = ['name', 'phone_number', 'is_active']
+    list_display = ['id', 'name', 'phone_number', 'is_active']
 
 @admin.register(OrderItem)
 class OrderItem(admin.ModelAdmin):

@@ -1,9 +1,14 @@
-from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
+from django.template.loader import render_to_string
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.core.mail import send_mail
+
+from django.shortcuts import get_object_or_404, render
+
 from django.core.paginator import Paginator
 
 from store.models import Product, Category, Order, OrderItem, Announcement
@@ -49,7 +54,7 @@ def user_login(request):
 @login_required
 def shop(request):
     categories = Category.objects.all()
-    products = Product.objects.all()
+    products = Product.objects.get_queryset().order_by('id')
 
     paginator = Paginator(products, 25)
     page_number = request.GET.get('page')
@@ -85,15 +90,16 @@ def product_detail(request, pk):
 @login_required
 def order_summary(request, pk):
     order = get_object_or_404(Order, id=pk)
-    last_name = order.last_name
+    name = order.name.username
+    item_list = list(OrderItem.objects.filter(order__pk=pk))
 
-    products = list(order.products.all())
+    confirmed = False
+    if order.is_active == False:
+        confirmed = True
 
-    # send OrderItems objects for quantity
-    # order_items = get_object_or_404(OrderItem, order=order)
-
-    return render(request, 'store/order_summary.html', context={'last_name': last_name,
-                                                                'products': products})   
+    return render(request, 'store/order_summary.html', context={'name': name,
+                                                                'item_list': item_list,
+                                                                'confirmed': confirmed})   
 
 
 def cart_summary(request): 
@@ -103,8 +109,6 @@ def cart_summary(request):
     if request.method == 'POST' and user.is_authenticated:
         form = OrderForm(request.POST)
         if form.is_valid() and bool(cart):
-            order_products = []
-            # send notification to customer
             last_name = form.cleaned_data['last_name']
             first_name = form.cleaned_data['first_name']
             email_address = form.cleaned_data['email_address']
@@ -114,8 +118,8 @@ def cart_summary(request):
                           name=user,)
             order.save()
             order_id = order.id
+            name = order.name.username
 
-            # create OrderItems objects with order object and products from cart
             for item in cart:
                 product = item['product']
                 price = item['price']
@@ -123,9 +127,29 @@ def cart_summary(request):
                 order_item = OrderItem(product=product, amount=amount, 
                                        order=order, price=price)
                 order_item.save()
-                order_products.append(product)
 
             cart.empty()
+
+            item_list = list(OrderItem.objects.filter(order__pk=order_id))
+
+            # notify admin of order
+            subject = 'NEW ORDER# ' + str(order_id)
+            message = 'A new order has been placed by ' + str(first_name) + " " + str(last_name) + ". Phone number: " + str(phone_number) + " Email: " + str(email_address) + "."
+            html_email = render_to_string(
+                        'store\order_summary_admin.html',
+                        {
+                        'name': name,
+                        'item_list': item_list
+                        }
+                    )
+                    
+            send_mail(
+                subject, 
+                message, 
+                'orders@storkdistro', 
+                ['mushfiquehasankhan@gmail.com'], 
+                html_message= html_email
+            )
 
             return HttpResponseRedirect(reverse('store:order_summary', args=[order_id]))
 

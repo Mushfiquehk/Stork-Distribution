@@ -1,19 +1,27 @@
 {% extends "./../base.html" %}
 {% block content %}
-<section class="container mx-auto">
-   <div class="flex flex-col justify-center px-4 py-4">
+<section class="flex justify-center items-center py-4 px-2">
+   <div class="flex flex-col justify-center w-full max-w-md">
        <h2 class="text-xl font-medium text-gray-500 my-1">Track Order Progress</h2>
-       <h1 class="text-2xl font-bold">Order Receipt # </h1>
-       <hr class="my-2"/>
-        <div class="flex justify-between my-2">
+       <h1 class="text-2xl font-bold">Order Summary</h1>
+       <hr class="my-4"/>
+        <div class="flex justify-between">
             <div class="text-lg font-medium">Order Status: </div>
-            <div class="text-xl font-medium" style="color: orange">Pending</div>
+            {% if confirmed %}
+            <div class="text-xl font-bold" style="color: green">Confirmed</div>
+            {% else %}
+            <div class="text-xl font-bold" style="color: orange">Pending</div>
+            {% endif %}
         </div>
+        <hr class="my-4"/>
+        <div class="flex justify-between">
+            <div class="text-lg font-medium">Name: </div>
+            <div class="text-xl font-bold">{{ name }}</div>
+        </div>
+        <div class="text-lg font-medium mt-2">Order Items</div>
         <hr class="my-2"/>
-        <div class="text-lg">Name: {{ last_name }}</div>
-        <div class="text-lg font-medium mt-4">Order Items</div>
-        <hr class="my-1"/>
-        {% for product in products %}
+        {% for item in item_list %}
+        {% with product=item.product %}
             <div class="flex justify-between w-full my-2">
                 <a href="{{ product.get_absolute_url }}">
                     <img src="{{ product.image.url }}" class="w-40 object-center object-cover">
@@ -21,11 +29,13 @@
 
                 <div class="flex flex-col justify-start items-end">
                     <a href="{{ product.get_absolute_url }}" class="font-medium text-right">{{ product.name }}</a>
-                    <div class="text-gray-500 text-sm font-medium mt-1">SKU: &dollar;{{ product.id }}</div>
-                    <div class="text-gray-500 text-sm font-medium mt-1">Unit Price: {{ product.price }}</div>              
+                    <div class="text-gray-500 text-sm font-medium mt-1">SKU# {{ product.id }}</div>
+                    <div class="text-gray-500 text-sm font-medium mt-1">Unit Price: {{ product.price }}</div>   
+                    <div class="text-gray-500 text-sm font-medium mt-1">Units: {{ item.amount }}</div>             
                 </div>
             </div>
             <hr/>
+        {% endwith %}
         {% endfor %}
    </div>
 </section>

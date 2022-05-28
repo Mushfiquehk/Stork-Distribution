@@ -1,0 +1,28 @@
+{% block content %}
+<section class="container flex justify-center items-center py-4 px-2">
+   <div class="flex flex-col justify-center w-full max-w-md">
+       <h1 class="text-2xl font-bold">Order Summary</h1>
+        <hr class="my-4"/>
+        <div class="flex justify-between">
+            <h2 class="text-lg font-medium">Name: {{ name }}</h2>
+        </div>
+        <h3 class="text-lg font-medium mt-2">Order Items</h3>
+        <hr class="my-2"/>
+        {% for item in item_list %}
+        {% with product=item.product %}
+            <div class="flex justify-between w-full my-2">
+                <div class="flex flex-col justify-start items-end">
+                    <h4>{{ product.name }}</h4>
+                    <div class="text-gray-500 text-sm font-medium mt-1">SKU# {{ product.id }}</div>
+                    <div class="text-gray-500 text-sm font-medium mt-1">Unit Price: {{ product.price }}</div>   
+                    <div class="text-gray-500 text-sm font-medium mt-1">Units: {{ item.amount }}</div>             
+                </div>
+            </div>
+            <hr/>
+        {% endwith %}
+        {% endfor %}
+   </div>
+</section>
+
+
+{% endblock %}

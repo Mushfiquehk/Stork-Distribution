@@ -74,7 +74,7 @@ class Order(models.Model):
         return reverse("store:order_summary", kwargs={'pk': self.pk})
     
     def __str__(self):
-        return str(str(self.first_name) + str(' ') + str(self.last_name))
+        return str(self.name.username)
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, 
@@ -83,10 +83,8 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, 
                               on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=4, decimal_places=2)
-    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    amount = models.IntegerField()
 
-    #class Meta:
-     #   ordering = ('-order.id')
     def __str__(self):
         return str(self.pk)
 
