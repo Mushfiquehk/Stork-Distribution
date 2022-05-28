@@ -77,7 +77,9 @@ def category_list(request, slug):
 @login_required
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
-    return render(request=request, template_name='store/product_detail.html', context={'product': product})
+    options = product.options.all()
+    return render(request=request, template_name='store/product_detail.html', context={'product': product, 
+                                                                                        'options': options})
 
 
 @login_required
@@ -193,3 +195,6 @@ def register(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('store:home'))
+
+def contact(request):
+    return render(request, template_name="contact.html")

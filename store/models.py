@@ -43,6 +43,9 @@ class Product(models.Model):
     
     price = models.DecimalField(max_digits=4, decimal_places=2)
     retail = models.DecimalField(max_digits=4, decimal_places=2, blank=True, default=99.99)
+    options = models.ManyToManyField('self',
+                                     symmetrical=True,
+                                     blank=True)
 
     def get_absolute_url(self):
         return reverse("store:product_detail", kwargs={"pk": self.pk})

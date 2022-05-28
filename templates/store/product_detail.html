@@ -28,7 +28,7 @@
                 <div class="text-xs font-light tracking-wider text-gray-500">SKU# {{ product.id }}</div>
               </div>
 
-              <p class="text-xl tracking-wide font-medium text-gray-900 mt-2">&dollar;{{ product.price }}</p>
+              <p class="text-xl tracking-wide font-bold text-gray-900 mt-2">&dollar;{{ product.price }}</p>
 
             </section>
 
@@ -36,10 +36,11 @@
               <h3 id="options-heading" class="sr-only">Product options</h3>
               <form>
                 <div class="grid grid-cols-4 gap-4 content-center rounded-lg bg-white overflow-hidden">
-                  <img src="{% static 'default.png' %}" alt="options" class="object-center object-cover">
-                  <img src="{% static 'default.png' %}" alt="options" class="object-center object-cover">
-                  <img src="{% static 'default.png' %}" alt="options" class="object-center object-cover">
-                  <img src="{% static 'default.png' %}" alt="options" class="object-center object-cover">
+                  {% for option in options %}
+                  <a href="{{ option.get_absolute_url }}" class="shadow-md">
+                    <img src="{{ option.image.url }}" alt="options" class="object-center object-cover">
+                  </a>
+                  {% endfor %}
                 </div>
               </form>
             </section>
