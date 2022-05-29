@@ -10,8 +10,9 @@
   <meta name="description" content="Official Point of Sale for Stork Distributions, Oklahoma">
   <link rel="icon" type="image/png" href="#">
 
-  <link rel="stylesheet" href="{% static 'store/css/base.css' %}"> 
+  {% tailwind_preload_css %}
   {% tailwind_css %}
+  <link rel="stylesheet" href="{% static 'store/css/base.css' %}"> 
   {% block styles %}{% endblock %}
 
   <script src="{% static 'store/js/base.js' %}"></script>

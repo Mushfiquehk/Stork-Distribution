@@ -147,7 +147,9 @@ def cart_summary(request):
                 subject, 
                 message, 
                 'orders@storkdistro', 
+                # change to storkdistro@gmail.com
                 ['mushfiquehasankhan@gmail.com'], 
+                fail_silently=True,
                 html_message= html_email
             )
 
