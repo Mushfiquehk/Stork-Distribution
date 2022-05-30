@@ -20,11 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['stork-env.eba-jphq7f2h.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['storkdistro.us-west-2.elasticbeanstalk.com']
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 # Tailwind app name
 TAILWIND_APP_NAME = 'theme'
