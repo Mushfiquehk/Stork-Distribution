@@ -19,16 +19,11 @@ def index(request):
 
     new_arrivals = Product.objects.all()[:8]
     featured = Product.objects.all()[:8]
-    announcements = Announcement.objects.all()
     categories = Category.objects.all()
 
-    first = announcements[0]
-    second = announcements[1]
     
     return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
                                                                         'featured': featured,
-                                                                        'first': first,
-                                                                        'second': second,
                                                                         'categories': categories})
 
 def user_login(request):
