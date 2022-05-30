@@ -20,9 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['stork-env.eba-wk6qt3um.us-west-2.elasticbeanstalk.com']
 
 SECURE_SSL_REDIRECT = False
 
@@ -104,8 +104,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / STATIC_URL
-    ]
+    BASE_DIR / 'static/'
+]
+STATIC_ROOT = 'assets'
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -128,6 +130,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 
+DEFAULT_FROM_EMAIL = "admin@storkdistro"
+SERVER_EMAIL = "server@storkdistro"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
