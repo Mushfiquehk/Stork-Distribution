@@ -1,0 +1,20 @@
+[33m721c48c[m[33m ([m[1;36mHEAD -> [m[1;32mdeploy[m[33m)[m added Procfile
+[33mc45dff3[m install gunicorn
+[33m8f40c60[m install gunicorn
+[33mfea19a9[m modified yaml config
+[33m97cde59[m modified yaml config
+[33m9f6fcdc[m modified yaml config
+[33mda11623[m configured for aws
+[33mb387dde[m added env files and built TW CSS
+[33m01057bd[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m sent email to admin after receiving order
+[33m208b073[m product options added to model
+[33ma11f69c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/deploy[m[33m, [m[1;32mmain[m[33m)[m added product options and fixed product detail view
+[33m7b94bb4[m new branch
+[33m6e8ad99[m revised password reset templates
+[33m1a9152a[m Added password reset, all done before changing models
+[33m838b56e[m before changing models
+[33mda8dd2f[m added javascript for dropdown
+[33m5ab395c[m Fixed product cards and added pagination
+[33me09bb8d[m minor changes to ui
+[33mbdf8c55[m Prepared for presentation
+[33m48faf8d[m Working User authentication and Order Management
