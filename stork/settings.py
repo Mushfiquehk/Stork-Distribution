@@ -116,7 +116,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = 'store:login'
 LOGOUT_REDIRECT_URL = 'store:home'
 
-NPM_BIN_PATH = "C:/Program Files/nodejs/node_modules/npm/bin"
+NPM_BIN_PATH = "C:/Program Files/nodejs/node_modules/npm/bin/npm.cmd"
 
 INTERNAL_IPS = [
     "127.0.0.1",
