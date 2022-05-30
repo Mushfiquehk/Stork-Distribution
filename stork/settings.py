@@ -22,9 +22,9 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['storkdistro.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # Tailwind app name
 TAILWIND_APP_NAME = 'theme'
@@ -116,7 +116,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = 'store:login'
 LOGOUT_REDIRECT_URL = 'store:home'
 
-NPM_BIN_PATH = "C:/Program Files/nodejs/node_modules/npm/bin/npm.cmd"
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
 INTERNAL_IPS = [
     "127.0.0.1",
