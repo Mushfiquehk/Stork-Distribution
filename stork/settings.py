@@ -22,7 +22,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['stork-env.eba-wk6qt3um.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['stork-env.eba-jphq7f2h.us-west-2.elasticbeanstalk.com']
 
 SECURE_SSL_REDIRECT = False
 
