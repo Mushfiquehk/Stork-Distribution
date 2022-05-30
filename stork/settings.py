@@ -116,7 +116,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = 'store:login'
 LOGOUT_REDIRECT_URL = 'store:home'
 
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = "/opt/elasticbeanstalk/node-install/node-v0.8.24-linux-x64/bin/npm"
 
 INTERNAL_IPS = [
     "127.0.0.1",
