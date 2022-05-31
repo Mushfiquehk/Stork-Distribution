@@ -1,6 +1,3 @@
-
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+# environment variables
+.env 
+./stork/.env
