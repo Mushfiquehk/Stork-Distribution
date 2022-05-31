@@ -1,3 +1,4 @@
+import re
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
@@ -198,10 +199,8 @@ def register(request):
             profile.save()
 
             registered = True
-
-        else:
-
-            print(user_form.errors, profile_form.errors)
+            
+            return HttpResponseRedirect(reverse('store:login'))
 
     else:
         # GET request
