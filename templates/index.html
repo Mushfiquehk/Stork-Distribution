@@ -23,8 +23,10 @@
     <div class="grid grid-cols-2 gap-2 mt-4 lg:grid-cols-4">
       {% for category in categories %}
       <div class="bg-gray-100 w-40 mb-10 shadow-md">
-        <img class="object-cover object-center w-full h-full" src="{{ category.image.url }}"> 
-        <p class="mt-2 font-bold text-md text-center text-gray-500">{{ category.name }}</p>
+        <a href="{{ category.get_absolute_url }}">
+          <img class="object-cover object-center w-full h-full" src="{{ category.image.url }}"> 
+          <p class="mt-2 font-bold text-md text-center text-gray-500">{{ category.name }}</p>
+        </a>
       </div>
       {% endfor %}
     </div>

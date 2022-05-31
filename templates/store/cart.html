@@ -10,7 +10,7 @@
         <div class="lg:flex justify-between items-stretch">
             <div class="overflow-x-auto lg:mr-6 grow">
                 <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-                    <div class="title-font tracking-wider font-extrabold text-2xl">Cart</div>
+                    <div class="text-gray-600 title-font tracking-wider font-extrabold text-2xl">Cart</div>
 
                     <div>
                         {% for item in cart %}
@@ -43,7 +43,7 @@
             <div class="overflow-x-auto lg:ml-6 grow">
                 <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
                     <!-- Order Confirmation Form -->
-                    <div class="title-font font-extrabold text-2xl">Order Confirmation</div>
+                    <div class="text-gray-600 title-font font-extrabold text-2xl">Order Confirmation</div>
                     <form class="flex flex-col rounded-lg mt-8" action="{% url "store:cart_summary" %}" method="POST">
                         {% csrf_token %}
                         {{ order_form.non_field_errors }}
