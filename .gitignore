@@ -1,3 +1,4 @@
 # environment variables
 .env 
 ./stork/.env
+db.sqlite3

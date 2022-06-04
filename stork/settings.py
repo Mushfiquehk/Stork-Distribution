@@ -113,9 +113,8 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-""" 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media" """
+MEDIA_ROOT = BASE_DIR / "media"
 
 LOGIN_URL = 'store:login'
 LOGOUT_REDIRECT_URL = 'store:home'
