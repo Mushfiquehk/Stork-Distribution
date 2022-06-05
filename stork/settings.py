@@ -24,9 +24,9 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://storkdistro.herokuapp.com/']
+ALLOWED_HOSTS = ['www.storkdistro.com']
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 # Tailwind app name
 TAILWIND_APP_NAME = 'theme'
