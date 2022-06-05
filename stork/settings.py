@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['www.storkdistro.com']
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # Tailwind app name
 TAILWIND_APP_NAME = 'theme'
