@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'theme',
     'store',
     'django_browser_reload',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -139,5 +140,13 @@ SERVER_EMAIL = "server@storkdistro"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AWS_ACCESS_KEY_ID=env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY=env("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME=env("AWS_STORAGE_BUCKET_NAME")
+
+AWS_DEFAULT_ACL=None 
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
