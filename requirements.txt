@@ -1,36 +1,45 @@
 arrow==1.2.2
-asgiref==3.5.2
-backports.zoneinfo==0.2.1
+asgiref @ file:///home/conda/feedstock_root/build_artifacts/asgiref_1652752042988/work
 binaryornot==0.4.4
+boto3==1.24.2
+botocore==1.27.2
+CacheControl==0.12.10
 certifi==2022.5.18.1
 chardet==4.0.0
 charset-normalizer==2.0.12
-click==8.1.3
+click==8.0.4
 colorama==0.4.4
 cookiecutter==1.7.3
+deprecation==2.1.0
 dj-database-url==0.5.0
-Django==4.0.4
-django-browser-reload==1.5.0
+Django @ file:///D:/bld/django_1649678300156/work
+django-browser-reload==1.3.0
 django-environ==0.8.1
 django-heroku==0.3.1
-django-on-heroku==1.1.2
+django-storages==1.12.3
 django-tailwind==3.1.1
 gunicorn==20.1.0
 idna==3.3
-Jinja2==3.1.2
+Jinja2==3.0.3
 jinja2-time==0.2.0
-MarkupSafe==2.1.1
-Pillow==9.1.1
+jmespath==1.0.0
+jsonpickle==1.5.2
+MarkupSafe==2.1.0
+msgpack==1.0.3
+Pillow==9.0.1
 poyo==0.5.0
 psycopg2==2.9.3
-psycopg2-binary==2.9.3
+pyparsing==3.0.7
 python-dateutil==2.8.2
-python-slugify==6.1.2
+python-slugify==6.1.1
 requests==2.27.1
-six==1.16.0
-sqlparse==0.4.2
+s3transfer==0.6.0
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1631317292236/work
+squareup==17.3.0.20220316
 text-unidecode==1.3
-tzdata==2022.1
-urllib3==1.26.9
-whitenoise==6.1.0
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1650370875435/work
+tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1647621564023/work
+urllib3==1.26.8
+whitenoise==6.2.0
 wincertstore==0.2
