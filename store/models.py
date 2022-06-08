@@ -29,6 +29,7 @@ class Product(models.Model):
     product_code = models.CharField(max_length=15)
     sku = models.CharField(max_length=15)
     
+    amount = models.DecimalField(max_digits=8, decimal_places=0)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     retail = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=99.99)
     options = models.ManyToManyField('self',
@@ -88,3 +89,4 @@ class UserProfile(models.Model):
 class Announcement(models.Model):
     description = models.CharField(max_length=255)
     image = models.ImageField(upload_to="announcements/", default="vendor_images/default.png")
+

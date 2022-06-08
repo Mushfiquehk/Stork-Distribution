@@ -1,4 +1,3 @@
-from re import L
 from django.contrib import admin
 from store.models import Category, Product, Order, UserProfile, Announcement, OrderItem
 
@@ -13,8 +12,8 @@ class Category(admin.ModelAdmin):
 
 @admin.register(Product)
 class Product(admin.ModelAdmin):
-    list_display = ['name', 'product_code', 'category', 'price', 'retail',]
-    list_editable = ['price', 'retail',]
+    list_display = ['name', 'product_code', 'category', 'price', 'amount', 'image']
+    list_editable = ['image',]
 
 @admin.register(Order)
 class Order(admin.ModelAdmin):
