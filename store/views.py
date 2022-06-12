@@ -20,7 +20,7 @@ def index(request):
 
     new_arrivals = Product.objects.all()[:8]
     featured = Product.objects.all()[:8]
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('id')
 
     
     return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
@@ -49,7 +49,7 @@ def user_login(request):
 
 @login_required
 def shop(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('id')
     products = Product.objects.get_queryset().order_by('id')
 
     paginator = Paginator(products, 28)
