@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 
 from django.shortcuts import get_object_or_404, render
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from store.models import Product, Category, Order, OrderItem, Announcement
 from store.forms import OrderForm, UserForm, UserProfileForm
@@ -52,14 +52,22 @@ def shop(request):
     categories = Category.objects.all()
     products = Product.objects.get_queryset().order_by('id')
 
-    paginator = Paginator(products, 25)
-    page_number = request.GET.get('page')
+    paginator = Paginator(products, 28)
+    page_number = request.GET.get('page', 1)
+    try:
+        products = paginator.page(page_number)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
     page_obj = paginator.get_page(page_number)
 
+    objects = len(page_obj.object_list)
 
-    return render(request=request, template_name="store/product_list.html", context={'categories': categories, 
-                                                                                     'products': products,
-                                                                                     'page_obj': page_obj})
+    return render(request=request, template_name="store/product_list.html", context={'products': products,
+                                                                                    'categories': categories,
+                                                                                    'objects': objects,
+                                                                                    'page_obj': page_obj})
 
 """ Invoked by get_absolute_url method for Category """
 @login_required
@@ -68,18 +76,28 @@ def category_list(request, slug):
     filtered = Product.objects.filter(category=category)
     categories = Category.objects.all()
 
-    paginator = Paginator(filtered, 25)
-    page_number = request.GET.get('page')
+    paginator = Paginator(filtered, 28)
+    page_number = request.GET.get('page', 1)
+    try:
+        products = paginator.page(page_number)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
     page_obj = paginator.get_page(page_number)
+    objects = len(page_obj.object_list)
 
-    return render(request=request, template_name="store/category_list.html", context={'products': filtered,
+    return render(request=request, template_name="store/category_list.html", context={'products': products,
                                                                                       'categories': categories,
+                                                                                      'objects': objects,
                                                                                       'page_obj': page_obj})
 @login_required
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
+    amount = product.amount
     options = product.options.all()
     return render(request=request, template_name='store/product_detail.html', context={'product': product, 
+                                                                                        'amount': amount,
                                                                                         'options': options})
 
 
@@ -128,7 +146,7 @@ def cart_summary(request):
 
             item_list = list(OrderItem.objects.filter(order__pk=order_id))
 
-            # notify admin of order
+            # email notification of order to admin
             subject = 'NEW ORDER# ' + str(order_id)
             message = 'A new order has been placed by ' + str(first_name) + " " + str(last_name) + ". Phone number: " + str(phone_number) + " Email: " + str(email_address) + "."
             html_email = render_to_string(
