@@ -66,32 +66,15 @@
                       <input type="number" name="amount" min="0" max="{{ amount }}" id="amount" value="1" class="border border-gray-200 rounded-md w-full focus:bg-gray-100 focus:outline-none sm:flex-1 bg-white text-gray-900 cursor-pointer" aria-labelledby="amount-select">
                     </label>
 
-                    <div class="grid grid-cols-4 gap-2">
-                      
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 5 %}style="text-decoration:line-through 2px;"disabled{% endif %}>5</button>
-                                            
-                      {% if amount > 10 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">10</button>
-                      {% endif %}
-                      {% if amount > 25 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">25</button>
-                      {% endif %}                      
-                      {% if amount > 50 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">50</button>
-                      {% endif %}                     
-                      {% if amount > 75 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">75</button>
-                      {% endif %}                     
-                      {% if amount > 100 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">100</button>
-                      {% endif %}                  
-                      {% if amount > 250 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">250</button>
-                      {% endif %}                     
-                      {% if amount > 500 %}
-                        <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer">500</button>
-                      {% endif %}
-                      </div>
+                    <div class="grid grid-cols-4 gap-2">                      
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 5 %}style="text-decoration:line-through 2px;"disabled{% endif %}>5</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount > 25 %}style="text-decoration:line-through 2px;"disabled{% endif %}>25</button>                   
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount > 50 %}style="text-decoration:line-through 2px;"disabled{% endif %}>50</button>               
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount > 75 %}style="text-decoration:line-through 2px;"disabled{% endif %}>75</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount > 100 %}style="text-decoration:line-through 2px;"disabled{% endif %}>100</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount > 100 %}style="text-decoration:line-through 2px;"disabled{% endif %}>250</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount > 100 %}style="text-decoration:line-through 2px;"disabled{% endif %}>500</button>
+                    </div>
                   </fieldset>
                 </div>
 
