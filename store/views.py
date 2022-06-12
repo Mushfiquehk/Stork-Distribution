@@ -150,7 +150,7 @@ def cart_summary(request):
             subject = 'NEW ORDER# ' + str(order_id)
             message = 'A new order has been placed by ' + str(first_name) + " " + str(last_name) + ". Phone number: " + str(phone_number) + " Email: " + str(email_address) + "."
             html_email = render_to_string(
-                        'store\order_summary_admin.html',
+                        'store/order_summary_admin.html',
                         {
                         'name': name,
                         'item_list': item_list
