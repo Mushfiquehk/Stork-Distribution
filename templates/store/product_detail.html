@@ -97,30 +97,30 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static "store/js/product_detail.js" %}"></script>
-  <script>
-    // script to update cart with product 
-    
-    const addToCart = document.querySelector('#update-cart')
+<script src="{% static "store/js/product_detail.js" %}"></script>
+<script>
+  // script to update cart with product 
+  
+  const addToCart = document.querySelector('#update-cart')
 
-    addToCart.addEventListener('click', function (event) {
-      event.preventDefault();
-      if ($('#amount').val() > 0) {        
-      $.ajax({
-        type: 'POST',
-        url: "{% url 'store:update_cart' %}",
-        data: {
-          product_id: $('#update-cart').val(),
-          amount: $('#amount').val(), // fix this
-          csrfmiddlewaretoken: "{{ csrf_token }}",
-          action: 'update',
-        },
-        success: function (json) {
-          $("#cart-items").innerHTML = json.items
-        },
-        error: function (xhr, errmsg, err) {}
-      });
-      };
+  addToCart.addEventListener('click', function (event) {
+    event.preventDefault();
+    if ($('#amount').val() > 0) {        
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'store:update_cart' %}",
+      data: {
+        product_id: $('#update-cart').val(),
+        amount: $('#amount').val(), // fix this
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        action: 'update',
+      },
+      success: function (json) {
+        $("#cart-items").innerHTML = json.items
+      },
+      error: function (xhr, errmsg, err) {}
     });
-  </script>
+    };
+  });
+</script>
 {% endblock %}

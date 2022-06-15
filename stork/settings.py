@@ -24,7 +24,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.storkdistro.com']
+ALLOWED_HOSTS = ['www.storkdistro.com', '127.0.0.1']
 
 SECURE_SSL_REDIRECT = True
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'storages',
 ]
 
+# 'django_browser_reload.middleware.BrowserReloadMiddleware',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'stork.urls'

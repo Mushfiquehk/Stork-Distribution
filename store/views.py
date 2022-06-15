@@ -188,8 +188,7 @@ def update_cart(request):
         product_id = int(request.POST.get('product_id'))
         cart.delete(product_id=product_id)
 
-    cart_total = cart.get_total_price()
-    response = JsonResponse({'items': len(cart), 'cart_total':  cart_total})
+    response = JsonResponse({'items': len(cart)})
     return response
 
 
