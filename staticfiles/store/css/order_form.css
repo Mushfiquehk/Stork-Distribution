@@ -6,7 +6,8 @@
 #id_first_name,
 #id_last_name,
 #id_phone_number,
-#id_pickup_time  {
+#id_address_line_1,
+#id_address_line_2  {
     width: 100%;
     padding: 0.5rem 0 0.5rem 0;
     line-height: 1.25rem;
@@ -22,7 +23,8 @@
 #id_first_name:focus,
 #id_last_name:focus,
 #id_phone_number:focus,
-#id_pickup_time:focus {
+#id_address_line_1:focus,
+#id_address_line_2:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
     border-color: rgb(8 145 178);

@@ -50,6 +50,7 @@ class Order(models.Model):
     phone_regex = RegexValidator(regex=r'^\+?1?\d{10,11}$', message="Phone number must be entered in the format: '1234567890'")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, default="9999999999")
     email = models.EmailField(max_length=254)
+    address = models.TextField()
     products = models.ManyToManyField(
                                     Product,
                                     through='OrderItem',
@@ -81,7 +82,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     website = models.URLField(blank=True)
-    certificates = models.ImageField(upload_to='proofs/', blank=True)
+    certificates = models.ImageField(upload_to='proofs/', verbose_name='Sales Tax ID')
 
     def __str__(self):
         return self.user.username

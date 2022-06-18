@@ -11,24 +11,13 @@ import django_heroku
 env = environ.Env()
 environ.Env.read_env()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
+DEBUG = True
+ALLOWED_HOSTS = []
+SECURE_SSL_REDIRECT = False
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['www.storkdistro.com', '127.0.0.1']
-
-SECURE_SSL_REDIRECT = True
-
-# Tailwind app name
 TAILWIND_APP_NAME = 'theme'
 
 INSTALLED_APPS = [
@@ -46,7 +35,6 @@ INSTALLED_APPS = [
     'storages',
 ]
 
-# 'django_browser_reload.middleware.BrowserReloadMiddleware',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,6 +44,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'stork.urls'
@@ -79,9 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'stork.wsgi.application'
 
-
-# Database
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -93,19 +79,12 @@ DATABASES = {
     }
 }
 
-# Internationalization
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
+# STATIC FILES 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -124,6 +103,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+
 # EMAIL CONFIG
 # GoDaddy - smtpout.secureserver.net
 #    PORT - 465
@@ -136,15 +117,11 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 DEFAULT_FROM_EMAIL = "admin@storkdistro"
 SERVER_EMAIL = "server@storkdistro"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AWS_ACCESS_KEY_ID=env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY=env("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME=env("AWS_STORAGE_BUCKET_NAME")
-
 AWS_DEFAULT_ACL=None 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

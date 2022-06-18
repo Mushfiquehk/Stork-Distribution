@@ -1,3 +1,4 @@
+from decimal import Decimal
 import re
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -105,15 +106,21 @@ def product_detail(request, pk):
 def order_summary(request, pk):
     order = get_object_or_404(Order, id=pk)
     name = order.name.username
+    address = order.address
     item_list = list(OrderItem.objects.filter(order__pk=pk))
+    total = sum(Decimal(item.price) * item.amount for item in item_list)
+    if total < 250:
+        total += 10
 
     confirmed = False
     if order.is_active == False:
         confirmed = True
 
-    return render(request, 'store/order_summary.html', context={'name': name,
+    return render(request, 'store/order_summary.html', context={'name': name, 
+                                                                'address': address,
                                                                 'item_list': item_list,
-                                                                'confirmed': confirmed})   
+                                                                'confirmed': confirmed,
+                                                                'total': total})   
 
 
 def cart_summary(request): 
@@ -127,9 +134,12 @@ def cart_summary(request):
             first_name = form.cleaned_data['first_name']
             email_address = form.cleaned_data['email_address']
             phone_number = form.cleaned_data['phone_number']
+            address_line_1 = form.cleaned_data['address_line_1']
+            address_line_2 = form.cleaned_data['address_line_2']
+            address = str(str(address_line_1) + str(address_line_2))
 
             order = Order(email=email_address, phone_number=phone_number,
-                          name=user,)
+                          name=user, address=address)
             order.save()
             order_id = order.id
             name = order.name.username
@@ -155,14 +165,12 @@ def cart_summary(request):
                         'name': name,
                         'item_list': item_list
                         }
-                    )
-                    
+                    )                    
             send_mail(
                 subject, 
                 message, 
-                'orders@storkdistro', 
-                # change to storkdistro@gmail.com
-                ['mushfiquehasankhan@gmail.com'], 
+                'storksalesteam@gmail.com',
+                ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',], 
                 fail_silently=True,
                 html_message= html_email
             )
@@ -172,12 +180,20 @@ def cart_summary(request):
     else:
         form = OrderForm()
 
-    return render(request, 'store/cart.html', {'order_form': form})
+    cart_total = cart.get_total_price()
+    free_delivery = 250 - cart_total
+
+    return render(request, 'store/cart.html', {'order_form': form,
+                                                'total': cart_total,
+                                                'left': free_delivery,})
 
 
 @login_required
 def update_cart(request):
     cart = Cart(request)
+    cart_total = cart.get_total_price()
+    free_delivery = 250 - cart_total
+
     if request.POST.get('action') == 'update':
         product_id = int(request.POST.get('product_id'))
         amount = int(request.POST.get('amount'))
@@ -188,7 +204,9 @@ def update_cart(request):
         product_id = int(request.POST.get('product_id'))
         cart.delete(product_id=product_id)
 
-    response = JsonResponse({'items': len(cart)})
+    response = JsonResponse({'items': len(cart),
+                             'total': cart_total, 
+                             'left': free_delivery})
     return response
 
 
@@ -208,13 +226,9 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-
-            # remove this, or use to store something useful
-            if 'certificates' in request.FILES:
-                profile.certificates = request.FILES['certificates']
+            profile.certificates = request.FILES['certificates']
 
             profile.save()
-
             registered = True
             
             return HttpResponseRedirect(reverse('store:login'))

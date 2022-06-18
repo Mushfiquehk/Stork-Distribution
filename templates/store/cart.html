@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<!-- CART SUMMARY -->
 <section class='bg-white'>
     <div class="px-2 py-4 container mx-auto">
         <div class="lg:flex justify-between items-stretch">
@@ -13,6 +14,9 @@
                     <div class="text-gray-600 title-font tracking-wider font-extrabold text-2xl">Cart</div>
 
                     <div>
+                        {% if total is 0 %}
+                        <div>No items in cart.</div>
+                        {% endif %}
                         {% for item in cart %}
                         {% with product=item.product %}
                         <div class="flex justify-between w-full my-2">
@@ -36,19 +40,29 @@
                         {% endwith %}
                         {% endfor %}
                     </div>  
+                    <hr/>
+                    <div class="flex justify-between my-2">
+                        <div class="text-gray-600">
+                            <p class='font-extrabold text-lg'>Cart Total:</p> 
+                            <p class="text-xs">Minimum $250 for free delivery inside greater Tulsa area.<p>
+                            <p class="text-xs">Add ${{ left }} more for free delivery!<p>
+                            <p class="text-xs">$10 delivery added to total otherwise.<p>
+                        </div>
+                        <div class="text-lg font-medium">${{ total }}</div>
+                    </div>
                 </div>                
             </div>
 
-
+            <!-- FORM -->
             <div class="overflow-x-auto lg:ml-6 grow">
                 <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
                     <!-- Order Confirmation Form -->
                     <div class="text-gray-600 title-font font-extrabold text-2xl">Order Confirmation</div>
-                    <form class="flex flex-col rounded-lg mt-8" action="{% url "store:cart_summary" %}" method="POST">
+                    <form class="flex flex-col rounded-lg mt-4" action="{% url "store:cart_summary" %}" method="POST">
                         {% csrf_token %}
                         {{ order_form.non_field_errors }}
                         <!-- Email Address-->
-                        <div class="grid grid-cols-1 mb-4">
+                        <div class="grid grid-cols-1 mb-2">
                             <div class="">
                                 <label for="{{ order_form.email_address.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                                     Email Address
@@ -62,7 +76,7 @@
 
                         <div class="grid grid-cols-2 gap-2 fieldWrapper">
                             <!-- First Name -->
-                            <div class="grid grid-cols-1 mb-4">
+                            <div class="grid grid-cols-1 mb-2">
                                 <div class="">
                                     <label for="{{ order_form.last_name.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                                         {{ order_form.first_name.label }}
@@ -74,7 +88,7 @@
                                 </div>
                             </div>
                             <!-- Last Name -->
-                            <div class="grid grid-cols-1 mb-4">
+                            <div class="grid grid-cols-1 mb-2">
                                 <div class="">
                                     <label for="{{ order_form.last_name.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                                         {{ order_form.last_name.label }}
@@ -87,7 +101,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 mb-4">
+                        <div class="grid grid-cols-1 mb-2">
                             <div class="">
                                 <label for="{{ order_form.phone_number.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                                     {{ order_form.phone_number.label }}
@@ -99,18 +113,29 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 mb-4">
+                        <div class="grid grid-cols-1 mb-2">
                             <div class="">
-                                <label for="{{ order_form.pickup_time.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                                    Pickup Notes
+                                <label for="{{ order_form.address_line_1.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                    Address Line 1
                                 </label>                
                             </div>
                             <div class="">
-                                {{ order_form.pickup_time.errors }}
-                                {{ order_form.pickup_time }}
+                                {{ order_form.address_line_1.errors }}
+                                {{ order_form.address_line_1 }}
                             </div>
-                        </div>     
-                        <button class="bg-cyan-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit self-center" type="submit">
+                        </div>    
+                        <div class="grid grid-cols-1 mb-2">
+                            <div class="">
+                                <label for="{{ order_form.address_line_2.id_for_label }}" class="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                    Address Line 2 (Optional)
+                                </label>                
+                            </div>
+                            <div class="">
+                                {{ order_form.address_line_2.errors }}
+                                {{ order_form.address_line_2 }}
+                            </div>
+                        </div>      
+                        <button class="bg-cyan-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit self-center mt-2" type="submit">
                             Confirm Order
                         </button>
 

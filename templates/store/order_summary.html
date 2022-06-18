@@ -4,7 +4,8 @@
    <div class="flex flex-col justify-center w-full max-w-md">
        <h2 class="text-xl font-medium text-gray-500 my-1">Track Order Progress</h2>
        <h1 class="text-2xl font-bold">Order Summary</h1>
-       <hr class="my-4"/>
+        <!-- ORDER STATUS -->
+       <hr class="my-2"/>
         <div class="flex justify-between">
             <div class="text-lg font-medium">Order Status: </div>
             {% if confirmed %}
@@ -13,12 +14,21 @@
             <div class="text-xl font-bold" style="color: orange">Pending</div>
             {% endif %}
         </div>
-        <hr class="my-4"/>
-        <div class="flex justify-between">
-            <div class="text-lg font-medium">Name: </div>
-            <div class="text-xl font-bold">{{ name }}</div>
+        <!-- ORDER DESCRIPTION -->
+        <hr class="my-2"/>
+        <div class="flex justify-between mt-2">
+            <div class="text-lg font-medium">Name </div>
+            <div class="text-lg font-medium">{{ name }}</div>
         </div>
-        <div class="text-lg font-medium mt-2">Order Items</div>
+        <div class="flex justify-between">
+            <div class="font-medium text-sm">Address </div>
+            <div class="font-medium text-sm">{{ address }}</div>
+        </div>
+
+        <div class="flex justify-between font-medium mt-4">
+            <p>Order Items</p>
+            <p>Description</p>
+        </div>
         <hr class="my-2"/>
         {% for item in item_list %}
         {% with product=item.product %}
@@ -37,6 +47,13 @@
             <hr/>
         {% endwith %}
         {% endfor %}
+        <hr/>
+        <div class="flex justify-between my-2">
+            <div class="">
+                <p class='font-bold'>Order Total (including delivery fee):</p> 
+            </div>
+            <div class="font-bold">${{ total }}</div>
+        </div>
    </div>
 </section>
 
