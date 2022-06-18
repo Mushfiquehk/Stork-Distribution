@@ -14,9 +14,9 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = True
-ALLOWED_HOSTS = []
-SECURE_SSL_REDIRECT = False
+DEBUG = False
+ALLOWED_HOSTS = ['storkdistro.com', '127.0.0.1']
+SECURE_SSL_REDIRECT = True
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -31,9 +31,9 @@ INSTALLED_APPS = [
     'gunicorn',
     'theme',
     'store',
-    'django_browser_reload',
     'storages',
 ]
+#    'django_browser_reload',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -44,8 +44,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
+#    'django_browser_reload.middleware.BrowserReloadMiddleware',
 
 ROOT_URLCONF = 'stork.urls'
 
@@ -85,7 +85,6 @@ USE_I18N = True
 USE_TZ = True
 
 # STATIC FILES 
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = 'static/'
@@ -103,7 +102,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+# NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
 # EMAIL CONFIG
 # GoDaddy - smtpout.secureserver.net
