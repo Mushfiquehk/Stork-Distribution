@@ -9,15 +9,19 @@ admin.site.register(UserProfile)
 @admin.register(Category)
 class Category(admin.ModelAdmin):
     list_display = ['name', 'slug']
+    ordering = ('id',)
 
 @admin.register(Product)
 class Product(admin.ModelAdmin):
     list_display = ['name', 'product_code', 'category', 'price', 'amount', 'image']
     list_editable = ['image',]
+    ordering = ('id',)
 
 @admin.register(Order)
 class Order(admin.ModelAdmin):
     list_display = ['id', 'name', 'phone_number', 'is_active']
+    # change to date added
+    # ordering = ('name')
 
 @admin.register(OrderItem)
 class OrderItem(admin.ModelAdmin):

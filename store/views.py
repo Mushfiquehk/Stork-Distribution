@@ -19,8 +19,8 @@ from store.cart import Cart
 
 def index(request):
 
-    new_arrivals = Product.objects.all()[:8]
-    featured = Product.objects.all()[:8]
+    new_arrivals = Product.objects.all().order_by('id')[:8]
+    featured = Product.objects.all().order_by('id')[:8]
     categories = Category.objects.all().order_by('id')
 
     
@@ -73,9 +73,9 @@ def shop(request):
 """ Invoked by get_absolute_url method for Category """
 @login_required
 def category_list(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    filtered = Product.objects.filter(category=category)
-    categories = Category.objects.all()
+    category = get_object_or_404(Category, slug=slug).order_by('id')
+    filtered = Product.objects.filter(category=category).order_by('id')
+    categories = Category.objects.all().order_by('id')
 
     paginator = Paginator(filtered, 28)
     page_number = request.GET.get('page', 1)
@@ -136,7 +136,7 @@ def cart_summary(request):
             phone_number = form.cleaned_data['phone_number']
             address_line_1 = form.cleaned_data['address_line_1']
             address_line_2 = form.cleaned_data['address_line_2']
-            address = str(str(address_line_1) + str(address_line_2))
+            address = str(str(address_line_1) + " " + str(address_line_2))
 
             order = Order(email=email_address, phone_number=phone_number,
                           name=user, address=address)
