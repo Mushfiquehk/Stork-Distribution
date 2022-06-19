@@ -73,7 +73,7 @@ def shop(request):
 """ Invoked by get_absolute_url method for Category """
 @login_required
 def category_list(request, slug):
-    category = get_object_or_404(Category, slug=slug).order_by('id')
+    category = get_object_or_404(Category, slug=slug)
     filtered = Product.objects.filter(category=category).order_by('id')
     categories = Category.objects.all().order_by('id')
 

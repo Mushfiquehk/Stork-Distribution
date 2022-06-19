@@ -14,9 +14,9 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['storkdistro.com', '127.0.0.1']
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -43,8 +43,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'stork.urls'
@@ -102,7 +102,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+# NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
 # EMAIL CONFIG
 # GoDaddy - smtpout.secureserver.net
