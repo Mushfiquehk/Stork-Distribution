@@ -45,8 +45,12 @@
                         <div class="text-gray-600">
                             <p class='font-extrabold text-lg'>Cart Total:</p> 
                             <p class="text-xs">Minimum $250 for free delivery inside greater Tulsa area.<p>
-                            <p class="text-xs">Add ${{ left }} more for free delivery!<p>
                             <p class="text-xs">$10 delivery added to total otherwise.<p>
+                            {% if left %}
+                                <p class="text-xs">Add ${{ left }} more for free delivery!<p>
+                            {% else %}                                    
+                                <p class="text-xs">Your order qualifies for FREE DELIVERY!<p>
+                            {% endif %}
                         </div>
                         <div class="text-lg font-medium">${{ total }}</div>
                     </div>

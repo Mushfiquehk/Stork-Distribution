@@ -181,7 +181,10 @@ def cart_summary(request):
         form = OrderForm()
 
     cart_total = cart.get_total_price()
-    free_delivery = 250 - cart_total
+    if cart_total < 250.0:
+        free_delivery = 250 - cart_total
+    else:
+        free_delivery = 0
 
     return render(request, 'store/cart.html', {'order_form': form,
                                                 'total': cart_total,
