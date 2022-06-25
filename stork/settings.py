@@ -14,7 +14,7 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['storkdistro.com', '127.0.0.1']
 SECURE_SSL_REDIRECT = True
 
