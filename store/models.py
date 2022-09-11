@@ -82,7 +82,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     website = models.URLField(blank=True)
-    certificates = models.ImageField(upload_to='proofs/', verbose_name='Sales Tax ID')
+    certificates = models.FileField(upload_to='proofs/', verbose_name='Sales Tax ID')
 
     def __str__(self):
         return self.user.username

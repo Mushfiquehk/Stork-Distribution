@@ -2,3 +2,4 @@
 .env 
 ./stork/.env
 db.sqlite3
+env

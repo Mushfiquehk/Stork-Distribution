@@ -1,5 +1,5 @@
 from decimal import Decimal
-import re
+
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
@@ -13,13 +13,14 @@ from django.shortcuts import get_object_or_404, render
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from store.models import Product, Category, Order, OrderItem, Announcement
+from store.models import Product, Category, Order, OrderItem
 from store.forms import OrderForm, UserForm, UserProfileForm
 from store.cart import Cart
 
 def index(request):
 
-    new_arrivals = Product.objects.all().order_by('id')[:8]
+    # TODO: only query 8 most recent objects
+    new_arrivals = Product.objects.all().order_by('id').reverse()[:8]
     featured = Product.objects.all().order_by('id')[:8]
     categories = Category.objects.all().order_by('id')
 
@@ -28,33 +29,14 @@ def index(request):
                                                                         'featured': featured,
                                                                         'categories': categories})
 
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
 
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            print("User logged in.")
-            return HttpResponseRedirect(reverse('store:all_products'))
-
-        else:
-            # also change to 
-            print("Could not login")
-            return HttpResponseRedirect(reverse('store:register'))
-
-    else:
-        return render(request=request, template_name="store/login.html", context={})
-
-@login_required
-def shop(request):
+def product_list(request):
     categories = Category.objects.all().order_by('id')
-    products = Product.objects.get_queryset().order_by('id')
+    products = Product.objects.get_queryset().order_by('id')[:84]
 
     paginator = Paginator(products, 28)
     page_number = request.GET.get('page', 1)
+
     try:
         products = paginator.page(page_number)
     except PageNotAnInteger:
@@ -66,12 +48,11 @@ def shop(request):
     objects = len(page_obj.object_list)
 
     return render(request=request, template_name="store/product_list.html", context={'products': products,
-                                                                                    'categories': categories,
-                                                                                    'objects': objects,
-                                                                                    'page_obj': page_obj})
+                                                                                     'categories': categories,
+                                                                                     'objects': objects,
+                                                                                     'page_obj': page_obj})
 
-""" Invoked by get_absolute_url method for Category """
-@login_required
+
 def category_list(request, slug):
     category = get_object_or_404(Category, slug=slug)
     filtered = Product.objects.filter(category=category).order_by('id')
@@ -79,12 +60,14 @@ def category_list(request, slug):
 
     paginator = Paginator(filtered, 28)
     page_number = request.GET.get('page', 1)
+
     try:
         products = paginator.page(page_number)
     except PageNotAnInteger:
         products = paginator.page(1)
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
+        
     page_obj = paginator.get_page(page_number)
     objects = len(page_obj.object_list)
 
@@ -92,17 +75,17 @@ def category_list(request, slug):
                                                                                       'categories': categories,
                                                                                       'objects': objects,
                                                                                       'page_obj': page_obj})
-@login_required
+
+
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
     amount = product.amount
     options = product.options.all()
     return render(request=request, template_name='store/product_detail.html', context={'product': product, 
-                                                                                        'amount': amount,
-                                                                                        'options': options})
+                                                                                       'amount': amount,
+                                                                                       'options': options})
 
 
-@login_required
 def order_summary(request, pk):
     order = get_object_or_404(Order, id=pk)
     name = order.name.username
@@ -191,7 +174,6 @@ def cart_summary(request):
                                                 'left': free_delivery,})
 
 
-@login_required
 def update_cart(request):
     cart = Cart(request)
     cart_total = cart.get_total_price()
@@ -214,41 +196,60 @@ def update_cart(request):
 
 
 def register(request):
-
-    registered = False
-
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)  
+        profile_form = UserProfileForm(request.POST, request.FILES)  
+        file_name = request.FILES['certificates']
 
         if user_form.is_valid() and profile_form.is_valid():
 
             user = user_form.save()
             user.set_password(user.password)
-            user.save()
 
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.certificates = request.FILES['certificates']
 
-            profile.save()
-            registered = True
+            profile.save()            
+            user.save()
+
+            login(request, user)
             
-            return HttpResponseRedirect(reverse('store:login'))
+            return HttpResponseRedirect(reverse("store:all_products"))
 
     else:
-        # GET request
+        # GET forms
         user_form = UserForm()
         profile_form = UserProfileForm()
 
     return render(request, 'store/registration.html', {'user_form': user_form,
-                                                        'profile_form': profile_form,
-                                                        'registered': registered})
+                                                       'profile_form': profile_form,})
+
+                                    
+
+def user_login(request):
+    error_message = ""
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('store:all_products'))
+
+        else:
+            # TODO: clear form for user to try again and send alert that account not found
+            error_message = "Invalid credentials. Please try again, or sign up for a new account"
+            return render(request=request, template_name="store/login.html", context={"error_message": error_message})
+
+    else:
+        return render(request=request, template_name="store/login.html", context={"error_message": error_message})
+
 
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('store:home'))
-
-def contact(request):
-    return render(request, template_name="contact.html")

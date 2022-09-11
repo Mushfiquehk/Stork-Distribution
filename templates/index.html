@@ -24,7 +24,7 @@
       {% for category in categories %}
       <div class="flex-shrink-0 rounded-full mx-1">      
         <a href="{{ category.get_absolute_url }}" class="flex flex-col items-center">
-          <img class="bg-gray-500 rounded-full shadow-md object-cover object-center" src="{{ category.image.url }}" style="height:64px;width:64px;">     
+          <img class="rounded-full shadow-md object-cover object-center" src="{{ category.image.url }}" style="height:72px;width:72px;">     
           <p class="mt-2 font-medium text-sm text-center text-gray-500">{{ category.name }}</p>   
       </a>
       </div> 
@@ -43,7 +43,7 @@
         </div>
         <!-- Product Cards -->
         <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
-          {% for product in featured %}
+          {% for product in new_arrivals %}
           <div class="flex flex-col justify-between content-start py-4 px-4 shadow-md rounded-lg">
             <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}">
               <img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}">
@@ -55,15 +55,9 @@
             </div>
 
             <div class="justify-self-end mt-4">
-              {% if user.is_authenticated %}
-                <a href="{{ product.get_absolute_url }}" class="no-underline">
-                  <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
-                </a>
-              {%else %}
-                <a href="{% url 'store:login' %}" class="no-underline">
-                  <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
-                </a>
-              {% endif %}
+              <a href="{{ product.get_absolute_url }}" class="no-underline">
+                <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
+              </a>
             </div>
           </div>
           {% endfor %}
@@ -73,7 +67,7 @@
 </section>
 
 <!-- Banner -->
-<section class="bg-gray-900 py-4 md:py-8">
+<section class="bg-gray-800">
   <div class="container md:flex justify-between mx-auto">
     <img alt="products" class="object-cover object-center h-64 w-full" src="{% static 'home_images/left.png' %}">
     <img alt="products" class="object-cover object-center w-full h-64" src="{% static 'home_images/right.png' %}">
@@ -81,11 +75,11 @@
 </section>
 
 <!-- Custom Designs -->
-<section class="bg-gray-800 lg:py-12 lg:flex lg:justify-center lg:min-h-full lg:shadow-lg">
-  <div class="bg-gray-800">
+<section class="bg-gray-800 lg:py-8 lg:flex lg:justify-center lg:min-h-full">
+  <div class="">
     <div class="max-w-2xl mx-auto py-12 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
       <div>
-        <h2 class="text-2xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs</h2>
+        <h2 class="text-2xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs<p class="text-lg font-medium">Coming soon . . . .</p></h2>
         <p class="mt-4 text-gray-400">Create custom designs specific to the packaging needs of your business. Contact us to consult on a design and get quotes on your order.</p>
   
         <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
@@ -101,7 +95,7 @@
   
           <div class="border-t border-gray-200 pt-4">
             <dt class="font-medium text-lg text-gray-200">Dimensions</dt>
-            <dd class="mt-2 text-sm text-gray-400">6.25&quot; x 3.55&quot; x 1.15&quot;</dd>
+            <dd class="mt-2 text-sm text-gray-400">Ask for options to choose from</dd>
           </div>
   
           <div class="border-t border-gray-200 pt-4">
@@ -126,11 +120,10 @@
   <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
       <div class="w-full flex-wrap mb-4 lg:mb-8">
         <h1 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
-        <p class="lg:pl-6 lg:w-2/3 mx-auto leading2relaxed text-base"></p>
       </div>
       <!-- Product Cards -->
       <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
-        {% for product in new_arrivals %}
+        {% for product in featured %}
         <div class="flex flex-col justify-between content-center py-4 px-4 shadow-md rounded-lg">
           
           <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}">

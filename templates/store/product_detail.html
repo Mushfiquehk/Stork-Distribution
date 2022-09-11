@@ -28,7 +28,11 @@
                 <div class="text-xs font-light tracking-wider text-gray-500">SKU# {{ product.id }}</div>
               </div>
 
-              <p class="text-xl tracking-wide font-bold text-gray-900 mt-2">&dollar;{{ product.price }}</p>
+              {% if request.user.is_authenticated %}
+                <p class="text-xl tracking-wide font-bold text-gray-900 mt-2">&dollar;{{ product.price }}</p>
+              {% else %}
+                <a class="text-lg font-medium tracking-wide text-cyan-600 mt-2" href="{% url "store:login" %}">Login to see price</a>
+              {% endif %}
 
             </section>
 

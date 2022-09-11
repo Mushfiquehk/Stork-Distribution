@@ -8,7 +8,7 @@
         <div class="font-medium text-md text-gray-400 pt-1">Categories</div>
         <div class="flex overflow-x-auto">
         {% for category in categories %}
-            <a href="{{ category.get_absolute_url }}" class="block py-2 mr-2 font-medium text-sm text-gray-800 underline" style="white-space:nowrap;">{{ category.name }}</a>
+            <a href="{{ category.get_absolute_url }}" class="block py-2 mr-2 font-medium text-sm text-gray-800" style="white-space:nowrap;">{{ category.name }}</a>
         {% endfor %}
         </div>      
         <hr/>     
@@ -19,7 +19,7 @@
             <div class="space-y-3 lg:w-1/5 lg:px-2 mt-2 lg:space-y-4 hidden md:block">
                 <div class="font-medium text-md text-gray-400 py-1">Categories</div>
                 {% for category in categories %}
-                    <a href="{{ category.get_absolute_url }}" class="block font-medium text-gray-800 hover:underline py-1">{{ category.name }}</a>
+                    <a href="{{ category.get_absolute_url }}" class="block font-medium text-gray-800 no-underline py-1">{{ category.name }}</a>
                 {% endfor %}
             </div>
             
@@ -45,7 +45,12 @@
                         <div class="flex flex-col grow w-full justify-start items-start text-gray-700 mt-2">
                             <p class="tracking-widest mt-1 text-gray-400 text-xs">{{ product.category }}</p>
                             <h4 class="font-medium grow">{{ product.name }}</h4>
-                            <p class="text-lg font-medium self-end mt-1 mx-1">&dollar;{{ product.price }}</p>
+
+                            {% if request.user.is_authenticated %}
+                                <p class="text-lg font-medium self-end mt-1 mx-1">&dollar;{{ product.price }}</p>
+                            {% else %}
+                                <a class="text-sm font-medium text-cyan-600 self-end mt-1 mx-1" href="{% url "store:login" %}">Login to see price</a>
+                            {% endif %}
 
                             <a href="{{ product.get_absolute_url }}" class="flex items-center justify-center w-full px-2 py-2 mt-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-cyan-600 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-gray-700">
                                 <span class="mx-1">View Product</span>
