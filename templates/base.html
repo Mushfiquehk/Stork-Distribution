@@ -81,7 +81,7 @@
 
 
           {% if user.is_authenticated %}
-            <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:all_products' %}">Shop</a>
+            <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:category_list' slug="cones" %}">Shop</a>
             <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'logout' %}">Logout</a>
           {% else %}
             <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:login' %}">Sign in</a>

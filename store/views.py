@@ -30,29 +30,6 @@ def index(request):
                                                                         'categories': categories})
 
 
-def product_list(request):
-    categories = Category.objects.all().order_by('id')
-    products = Product.objects.get_queryset().order_by('id')[:84]
-
-    paginator = Paginator(products, 28)
-    page_number = request.GET.get('page', 1)
-
-    try:
-        products = paginator.page(page_number)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
-    page_obj = paginator.get_page(page_number)
-
-    objects = len(page_obj.object_list)
-
-    return render(request=request, template_name="store/product_list.html", context={'products': products,
-                                                                                     'categories': categories,
-                                                                                     'objects': objects,
-                                                                                     'page_obj': page_obj})
-
-
 def category_list(request, slug):
     category = get_object_or_404(Category, slug=slug)
     filtered = Product.objects.filter(category=category).order_by('id')
@@ -198,8 +175,7 @@ def update_cart(request):
 def register(request):
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(request.POST, request.FILES)  
-        file_name = request.FILES['certificates']
+        profile_form = UserProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
 
@@ -215,7 +191,7 @@ def register(request):
 
             login(request, user)
             
-            return HttpResponseRedirect(reverse("store:all_products"))
+            return HttpResponseRedirect(reverse("store:category_list", args=["accessories"]))
 
     else:
         # GET forms
@@ -238,7 +214,7 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('store:all_products'))
+            return HttpResponseRedirect(reverse("store:category_list", args=["accessories"]))
 
         else:
             # TODO: clear form for user to try again and send alert that account not found

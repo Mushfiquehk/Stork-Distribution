@@ -15,13 +15,12 @@ class Category(admin.ModelAdmin):
 class Product(admin.ModelAdmin):
     list_display = ['name', 'product_code', 'category', 'price', 'amount', 'image']
     list_editable = ['image',]
-    ordering = ('id',)
+    ordering = ('-id',)
 
 @admin.register(Order)
 class Order(admin.ModelAdmin):
     list_display = ['id', 'name', 'phone_number', 'is_active']
-    # change to date added
-    # ordering = ('name')
+    ordering = ('-id',)
 
 @admin.register(OrderItem)
 class OrderItem(admin.ModelAdmin):
