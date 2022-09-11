@@ -82,7 +82,7 @@ def order_summary(request, pk):
                                                                 'confirmed': confirmed,
                                                                 'total': total})   
 
-
+@login_required
 def cart_summary(request): 
     cart = Cart(request)    
     user = request.user
@@ -150,7 +150,7 @@ def cart_summary(request):
                                                 'total': cart_total,
                                                 'left': free_delivery,})
 
-
+@login_required
 def update_cart(request):
     cart = Cart(request)
     cart_total = cart.get_total_price()
@@ -225,7 +225,6 @@ def user_login(request):
         return render(request=request, template_name="store/login.html", context={"error_message": error_message})
 
 
-@login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('store:home'))
