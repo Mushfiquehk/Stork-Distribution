@@ -9,16 +9,16 @@ import django_heroku
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, True)
+    DEBUG=(bool, False)
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR / 'stork', '.env'))
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['storkdistro.com', '127.0.0.1']
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 TAILWIND_APP_NAME = 'theme'
 
