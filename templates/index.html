@@ -5,7 +5,7 @@
 
 <!-- Discounts -->
 <div style="background: #eee758" class="py-2 text-sm tracking-wide font-medium text-center">
-  Welcome to Stork Distribution!
+  Welcome to Stork Distribution
 </div>
 
 <!-- Announcements -->
@@ -34,11 +34,21 @@
 </section>
 
 
+<!-- Search and Navs -->
+<section class="container mx-auto py-2 md:py-4 px-2">
+  <div class="flex justify-center">
+    <div class="border-2 border-cyan-400 p-2 rounded-lg">
+      <a href="{% url 'store:category_list' slug='accessories' %}" class="no-underline text-sm font-medium">View All Products</a>
+    </div>
+  </div>
+</section>
+
+
 <!-- BEST SELLERS -->
 <section class="bg-white text-gray-600 body-font">
     <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
         <div class="w-full flex-wrap mb-4 lg:mb-8">
-            <h1 class="text-2xl sm:text-3xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Shop Best Sellers</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
             <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
         </div>
         <!-- Product Cards -->
@@ -115,11 +125,11 @@
   </div>
 </section>
 
-<!-- New Arrivals -->
+<!-- Featured -->
 <section class="bg-white my-1 text-gray-600 body-font">
   <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
       <div class="w-full flex-wrap mb-4 lg:mb-8">
-        <h1 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
+        <h1 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Featured Products</h1>
       </div>
       <!-- Product Cards -->
       <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
@@ -133,7 +143,6 @@
           <div class="my-2">
             <h3 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
             <h2 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
-            <p class="my-1 text-xs">Short Description of the product if available</p>
           </div>
 
           <div class="justify-self-end mt-4">

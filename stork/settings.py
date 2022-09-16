@@ -9,7 +9,7 @@ import django_heroku
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,9 +34,9 @@ INSTALLED_APPS = [
     'theme',
     'store',
     'storages',
-    'django_browser_reload',
 ]
 
+#    'django_browser_reload',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -46,15 +46,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
+#    'django_browser_reload.middleware.BrowserReloadMiddleware',
 
 ROOT_URLCONF = 'stork.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [ BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,6 +127,6 @@ AWS_DEFAULT_ACL=None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+# NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
 django_heroku.settings(locals())

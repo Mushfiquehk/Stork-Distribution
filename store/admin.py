@@ -13,7 +13,7 @@ class Category(admin.ModelAdmin):
 
 @admin.register(Product)
 class Product(admin.ModelAdmin):
-    list_display = ['name', 'product_code', 'category', 'price', 'amount', 'image']
+    list_display = ['name', 'price', 'amount', 'image', 'is_active']
     list_editable = ['image',]
     ordering = ('-id',)
 

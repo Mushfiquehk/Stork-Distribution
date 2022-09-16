@@ -23,6 +23,7 @@ class Category(models.Model):
         return str(self.name)
 
 class Product(models.Model):    
+    is_active = models.BooleanField(default=True)
     category = models.ForeignKey(Category, related_name="category", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='product_images/', default='product_images/default.png')

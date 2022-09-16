@@ -60,28 +60,30 @@
                   </div>
                   
                   <!-- out of stock label -->
-                  {% if amount < 5 %}
+                  {% if product.amount < 5 %}
                     <p class="text-orange-500 text-sm italic">Low stock. Order early to get the last ones!</p>
                   {% endif %}
                   <fieldset class="mt-2">
                     <legend class="sr-only">Choose an amount</legend>
 
                     <label class="group relative mb-4 flex items-center justify-center text-sm font-medium shadow-sm uppercase">
-                      <input type="number" name="amount" min="0" max="{{ amount }}" id="amount" value="1" class="border border-gray-200 rounded-md w-full focus:bg-gray-100 focus:outline-none sm:flex-1 bg-white text-gray-900 cursor-pointer" aria-labelledby="amount-select">
+                      <input type="number" name="amount" min="0" max="{{ product.amount }}" id="amount" value="1" class="border border-gray-200 rounded-md w-full focus:bg-gray-100 focus:outline-none sm:flex-1 bg-white text-gray-900 cursor-pointer" aria-labelledby="amount-select">
                     </label>
 
                     <div class="grid grid-cols-4 gap-2">                      
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 5 %}style="text-decoration:line-through 2px;"disabled{% endif %}>5</button>
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 10 %}style="text-decoration:line-through 2px;"disabled{% endif %}>10</button>  
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 25 %}style="text-decoration:line-through 2px;"disabled{% endif %}>25</button>                   
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 50 %}style="text-decoration:line-through 2px;"disabled{% endif %}>50</button>               
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 75 %}style="text-decoration:line-through 2px;"disabled{% endif %}>75</button>
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 100 %}style="text-decoration:line-through 2px;"disabled{% endif %}>100</button>
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 250 %}style="text-decoration:line-through 2px;"disabled{% endif %}>250</button>
-                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if amount < 500 %}style="text-decoration:line-through 2px;"disabled{% endif %}>500</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 5 %}style="text-decoration:line-through 2px;"disabled{% endif %}>5</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 10 %}style="text-decoration:line-through 2px;"disabled{% endif %}>10</button>  
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 25 %}style="text-decoration:line-through 2px;"disabled{% endif %}>25</button>                   
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 50 %}style="text-decoration:line-through 2px;"disabled{% endif %}>50</button>               
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 75 %}style="text-decoration:line-through 2px;"disabled{% endif %}>75</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 100 %}style="text-decoration:line-through 2px;"disabled{% endif %}>100</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 250 %}style="text-decoration:line-through 2px;"disabled{% endif %}>250</button>
+                      <button type="button" class="group amt-val border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 bg-white shadow-sm text-gray-900 cursor-pointer" {% if product.amount < 500 %}style="text-decoration:line-through 2px;"disabled{% endif %}>500</button>
                     </div>
                   </fieldset>
                 </div>
+
+                <div id="amount-error"></div>
 
                 {% if request.user.is_authenticated %}
                   <button id="update-cart" value="{{ product.id }}" class="mt-6 w-full bg-cyan-600 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600">
@@ -115,10 +117,11 @@
   // script to update cart with product 
   
   const addToCart = document.querySelector('#update-cart')
+  const maxAmount = document.querySelector('#update-cart').max
 
   addToCart.addEventListener('click', function (event) {
     event.preventDefault();
-    if ($('#amount').val() > 0) {        
+    if ($('#amount').val() > 0) && ($('#amount').val < $('#amount').max ) {        
     $.ajax({
       type: 'POST',
       url: "{% url 'store:update_cart' %}",
@@ -131,7 +134,9 @@
       success: function (json) {
         $("#cart-items").innerHTML = json.items
       },
-      error: function (xhr, errmsg, err) {}
+      error: function (xhr, errmsg, err) {
+        $("#amount-error").innerHTML = "This amount of product is not in stock. Please contact store."
+      }
     });
     };
   });
