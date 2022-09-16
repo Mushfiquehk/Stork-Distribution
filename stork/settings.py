@@ -17,7 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR / 'stork', '.env'))
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
-ALLOWED_HOSTS = ['storkdistro.com', '127.0.0.1']
+ALLOWED_HOSTS = ['www.storkdistro.com', '127.0.0.1']
 SECURE_SSL_REDIRECT = False
 
 TAILWIND_APP_NAME = 'theme'
