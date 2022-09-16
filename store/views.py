@@ -20,8 +20,8 @@ from store.cart import Cart
 def index(request):
 
     # TODO: only query 8 most recent objects
-    new_arrivals = Product.objects.filter(is_active=True).order_by('id').reverse()[:8]
-    featured = Product.objects.filter(is_active=True).order_by('id')[:8]
+    new_arrivals = Product.objects.filter(is_active=True).exclude(amount__lte=0).order_by('id').reverse()[:8]
+    featured = Product.objects.filter(is_active=True).exclude(amount__lte=0).order_by('id')[:8]
     categories = Category.objects.all().order_by('id')
 
     
@@ -32,7 +32,7 @@ def index(request):
 
 def category_list(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    filtered = Product.objects.filter(category=category, is_active=True).order_by('id')
+    filtered = Product.objects.filter(category=category, is_active=True).exclude(amount__lte=0).order_by('id')
     categories = Category.objects.all().order_by('id')
 
     paginator = Paginator(filtered, 28)
