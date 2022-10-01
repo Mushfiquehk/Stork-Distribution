@@ -5,7 +5,7 @@
 
 <!-- Discounts -->
 <div style="background: #eee758" class="py-2 text-sm tracking-wide font-medium text-center">
-  Welcome to Stork Distribution
+  Visit our Facebook page <a href="https://www.facebook.com/stork.distributions" class="underline font-medium">here</a>
 </div>
 
 <!-- Announcements -->
@@ -24,7 +24,7 @@
       {% for category in categories %}
       <div class="flex-shrink-0 rounded-full mx-1">      
         <a href="{{ category.get_absolute_url }}" class="flex flex-col items-center">
-          <img class="rounded-full shadow-md object-cover object-center" src="{{ category.image.url }}" style="height:72px;width:72px;">     
+          <img alt="image of a category of product" class="rounded-full shadow-md object-cover object-center" src="{{ category.image.url }}" style="height:72px;width:72px;">     
           <p class="mt-2 font-medium text-sm text-center text-gray-500">{{ category.name }}</p>   
       </a>
       </div> 
