@@ -21,7 +21,7 @@
                         {% with product=item.product %}
                         <div class="flex justify-between w-full my-2">
                             <a href="{{ product.get_absolute_url }}">
-                                <img src="{{ product.image.url }}" class="w-40 object-center object-cover">
+                                <img alt="picture of product" src="{{ product.image.url }}" class="w-40 object-center object-cover">
                             </a>
 
                             <div class="flex flex-col justify-between items-end">

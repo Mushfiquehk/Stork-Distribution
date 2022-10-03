@@ -13,8 +13,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR / 'stork', '.env'))
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = True
-ALLOWED_HOSTS = ['www.storkdistro.com', 'http://0.0.0.0:5000/']
+DEBUG = False
+ALLOWED_HOSTS = ['www.storkdistro.com',]
 SECURE_SSL_REDIRECT = False
 
 TAILWIND_APP_NAME = 'theme'
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'tailwind',
     'gunicorn',
     'theme',
@@ -51,7 +52,7 @@ ROOT_URLCONF = 'stork.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,9 +98,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = 'store:login'
 LOGOUT_REDIRECT_URL = 'store:home'
 
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
@@ -124,6 +125,6 @@ AWS_DEFAULT_ACL=None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
 django_heroku.settings(locals())

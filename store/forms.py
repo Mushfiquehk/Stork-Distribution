@@ -20,3 +20,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta():
         model = UserProfile 
         fields = ('website', 'certificates')
+
+class SearchForm(forms.Form):
+    search_text = forms.CharField(label="search_text")

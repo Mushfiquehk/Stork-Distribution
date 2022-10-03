@@ -1,4 +1,5 @@
 from decimal import Decimal
+from re import search
 
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -7,27 +8,59 @@ from django.template.loader import render_to_string
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.core.mail import send_mail
+from django.contrib.postgres.search import SearchVector
 
 from django.shortcuts import get_object_or_404, render
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 
 from store.models import Product, Category, Order, OrderItem
-from store.forms import OrderForm, UserForm, UserProfileForm
+from store.forms import OrderForm, SearchForm, UserForm, UserProfileForm
 from store.cart import Cart
 
 def index(request):
 
-    # TODO: only query 8 most recent objects
     new_arrivals = Product.objects.filter(is_active=True).exclude(amount__lte=0).order_by('id').reverse()[:8]
     featured = Product.objects.filter(is_active=True).exclude(amount__lte=0).order_by('id')[:8]
     categories = Category.objects.all().order_by('id')
 
     
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        text = form['search_text'].data
+        searched = Product.objects.annotate(
+            search=SearchVector('name',
+            'category__name'),
+        ).filter(search=text).exclude(amount__lte=0).order_by('id')
+        print(text)
+        categories = Category.objects.all().order_by('id')
+
+        paginator = Paginator(searched, 28)
+        page_number = request.GET.get('page', 1)
+
+        try:
+            products = paginator.page(page_number)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products = paginator.page(paginator.num_pages)
+            
+        page_obj = paginator.get_page(page_number)
+        objects = len(page_obj.object_list)
+
+        return render(request, 'store/category_list.html', context={"products": products,
+                                                                    "categories": categories,
+                                                                    "objects": objects,
+                                                                    "page_obj": page_obj,})
+    else:
+        search_form = SearchForm() 
+
+    
     return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
                                                                         'featured': featured,
-                                                                        'categories': categories})
+                                                                        'categories': categories,
+                                                                        'search_form': search_form})
 
 
 def category_list(request, slug):
