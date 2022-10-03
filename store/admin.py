@@ -15,6 +15,7 @@ class Category(admin.ModelAdmin):
 class Product(admin.ModelAdmin):
     list_display = ['name', 'price', 'amount', 'image', 'is_active']
     list_filter = ('category',)
+    list_editable = ('image', 'is_active')
     search_fields = ('name',)
     ordering = ('-id',)
 
