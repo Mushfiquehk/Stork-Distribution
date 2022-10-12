@@ -9,17 +9,17 @@
 </div>
 
 <!-- Announcements -->
-<section class="">
+<div class="">
   <div class="container min-w-full">
     <img alt="store" class="object-cover object-center w-fit" src="{% static 'home_images/banner.png' %}">
   </div>
-</section>
-<hr/>
+</div>
+<hr>
 
 <!-- Categories -->
 <section class="bg-gray-100">
   <div class="container mx-auto py-2 md:py-4 px-2 sm:px-0">
-    <h1 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 py-1">Shop Categories</h1>
+    <h2 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 py-1">Shop Categories</h1>
     <div class="flex overflow-x-auto py-4">
       {% for category in categories %}
       <div class="flex-shrink-0 rounded-full mx-1">      
@@ -67,7 +67,7 @@
 <section class="bg-white text-gray-600 body-font">
     <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
         <div class="w-full flex-wrap mb-4 lg:mb-8">
-            <h1 class="text-2xl sm:text-3xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
+            <h2 class="text-2xl sm:text-3xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
             <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
         </div>
         <!-- Product Cards -->
@@ -79,8 +79,8 @@
             </a>
 
             <div class="my-2">
-              <h3 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
-              <h2 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
+              <h4 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
+              <h3 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
             </div>
 
             <div class="justify-self-end mt-4">
@@ -96,19 +96,20 @@
 </section>
 
 <!-- Banner -->
-<section class="bg-gray-800">
+<div class="bg-gray-800">
   <div class="container md:flex justify-between mx-auto">
     <img alt="products" class="object-cover object-center h-64 w-full" src="{% static 'home_images/left.png' %}">
     <img alt="products" class="object-cover object-center w-full h-64" src="{% static 'home_images/right.png' %}">
   </div>
-</section>
+</div>
 
 <!-- Custom Designs -->
 <section class="bg-gray-800 lg:py-8 lg:flex lg:justify-center lg:min-h-full">
   <div class="">
     <div class="max-w-2xl mx-auto py-12 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
       <div>
-        <h2 class="text-2xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs<p class="text-lg font-medium">Coming soon . . . .</p></h2>
+        <h2 class="text-2xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs</h2>
+        <p class="text-lg font-medium">Coming soon . . . .</p>
         <p class="mt-4 text-gray-400">Create custom designs specific to the packaging needs of your business. Contact us to consult on a design and get quotes on your order.</p>
   
         <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
@@ -148,7 +149,7 @@
 <section class="bg-white my-1 text-gray-600 body-font">
   <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
       <div class="w-full flex-wrap mb-4 lg:mb-8">
-        <h1 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Featured Products</h1>
+        <h2 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Featured Products</h1>
       </div>
       <!-- Product Cards -->
       <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
@@ -160,8 +161,8 @@
           </a>
 
           <div class="my-2">
-            <h3 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
-            <h2 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
+            <h4 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
+            <h3 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
           </div>
 
           <div class="justify-self-end mt-4">

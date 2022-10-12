@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load tailwind_tags %}
-<html lang='en'>
+<html lang='en' dir="ltr">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Stork Distribution{% endblock %}</title>
@@ -9,8 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="Home page of online point of sale for Stork Distribution and Supply LLC, Oklahoma">
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" alt="Icon of website">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" alt="Icon of website">
   <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
 
   {% tailwind_preload_css %}
@@ -49,13 +49,13 @@
 
               <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
                 {% with total_items=cart|length %}
-                <div id="cart-items" class="d-inline-flex">
+                <p id="cart-items" class="d-inline-flex">
                   {% if total_items > 0 %}
                       {{ total_items }}
                   {% else %}
                       0
                   {% endif %}
-                </div>
+                </p>
                 {% endwith %}  
               </span>
             </a>   
@@ -97,13 +97,13 @@
               <!-- Number of items added -->
               <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
                 {% with total_items=cart|length %}
-                <div id="cart-items" class="d-inline-flex">
+                <p id="cart-items" class="d-inline-flex">
                   {% if total_items > 0 %}
                       {{ total_items }}
                   {% else %}
                       0
                   {% endif %}
-                </div>
+                </p>
                 {% endwith %}  
               </span>
 
