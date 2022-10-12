@@ -123,7 +123,7 @@ AWS_DEFAULT_ACL=None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
 # Debugging in heroku live
 # LOGGING = {
