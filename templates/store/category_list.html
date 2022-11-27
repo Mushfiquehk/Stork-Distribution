@@ -46,8 +46,10 @@
                             <p class="tracking-widest mt-1 text-gray-400 text-xs">{{ product.category }}</p>
                             <h4 class="font-medium grow">{{ product.name }}</h4>
 
-                            {% if request.user.is_authenticated %}
+                            {% if request.user.is_authenticated and request.user.user_profile.is_active %}
                                 <p class="text-lg font-medium self-end mt-1 mx-1">&dollar;{{ product.price }}</p>
+                            {% elif not request.user.user_profile.is_active %}
+                                <p class="text-sm font-medium text-cyan-600 self-end mt-1 mx-1">Please wait while an admin authorizes your registration</p>
                             {% else %}
                                 <a class="text-sm font-medium text-cyan-600 self-end mt-1 mx-1" href="{% url "store:login" %}">Login to see price</a>
                             {% endif %}

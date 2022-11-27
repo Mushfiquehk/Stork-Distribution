@@ -86,7 +86,6 @@ def category_list(request, slug):
                                                                                       'objects': objects,
                                                                                       'page_obj': page_obj})
 
-
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
     options = product.options.all()
@@ -221,6 +220,17 @@ def register(request):
             user.save()
 
             login(request, user)
+
+            subject = 'New User Authrization Request'
+            message = 'A new user has been created and account. Authorization from an admin is required.'   
+            send_mail(
+                subject, 
+                message, 
+                'storksalesteam@gmail.com',
+                ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',], 
+                fail_silently=True,
+                html_message= 'registration/new_user.html'
+            )
             
             return HttpResponseRedirect(reverse("store:category_list", args=["accessories"]))
 

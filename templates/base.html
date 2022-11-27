@@ -19,8 +19,6 @@
   {% block styles %}{% endblock %}
 
   <script src="{% static 'store/js/base.js' %}"></script>
-
-  <!-- JQuery for modal -->
   <script src="{% static 'store/js/jquery-3.6.0.min.js' %}"></script>
     
 </head>
@@ -124,85 +122,85 @@
   </main>
   <!-- Footer -->
   <footer class="text-white bg-cyan-600 body-font">
-      <div class="container px-5 lg:px-0 py-8 mx-auto">
-        <div class="flex flex-wrap md:text-left text-center order-first">
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium tracking-widest text-sm mb-3">LOCATION</h2>
-            <address class="mb-10 font-medium text-sm">
-              <div>9912 E 45th Pl STE A</div>
-              <div>Tulsa, OK 74146</div>
-            </address>
-          </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium tracking-widest text-sm mb-3">STORE HOUR</h2>
-              <nav class="list-none mb-10 font-medium text-sm">
-                <li>
-                  <a class="hover:text-gray-200">Monday - Saturday: 10AM-6PM</a>
-                </li>   
-                <li>
-                  <a class="hover:text-gray-300 text-sm">Closed Sunday</a>
-                </li>               
-              </nav>
-            </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium tracking-widest text-sm mb-3">CONTACT</h2>
+    <div class="container px-5 lg:px-0 py-8 mx-auto">
+      <div class="flex flex-wrap md:text-left text-center order-first">
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium tracking-widest text-sm mb-3">LOCATION</h2>
+          <address class="mb-10 font-medium text-sm">
+            <div>9912 E 45th Pl STE A</div>
+            <div>Tulsa, OK 74146</div>
+          </address>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 class="title-font font-medium tracking-widest text-sm mb-3">STORE HOUR</h2>
             <nav class="list-none mb-10 font-medium text-sm">
               <li>
-                <div class="sr-only">Phone Number:</div>
-                <a class="hover:text-gray-200" href="tel:+9185616863">(918) 561-6863</a>
-                </li>
-                <li>
-                  <div class="sr-only">Email Address:</div>
-                <a class="hover:text-gray-200" href="mailto:storkdistro@gmail.com">storkdistro@gmail.com</a>
-              </li>
+                <a class="hover:text-gray-200">Monday - Saturday: 10AM-6PM</a>
+              </li>   
+              <li>
+                <a class="hover:text-gray-300 text-sm">Closed Sunday</a>
+              </li>               
             </nav>
           </div>
-          
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium text-white tracking-widest text-sm mb-2">GOT QUESTIONS?</h2>
-            <div class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-              <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-                <input type="text" id="footer-field" name="footer-field" placeholder="Email Address" class="w-full bg-gray-800 rounded border-0 bg-opacity-80 border-cyan-600 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-cyan-600 text-base outline-none text-gray-100 py-1 px-3 leading-8">
-              </div>
-              <button class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex font-medium bg-gray-800 border-0 py-2 px-6 rounded">Get Help</button>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium tracking-widest text-sm mb-3">CONTACT</h2>
+          <nav class="list-none mb-10 font-medium text-sm">
+            <li>
+              <div class="sr-only">Phone Number:</div>
+              <a class="hover:text-gray-200" href="tel:+9185616863">(918) 561-6863</a>
+              </li>
+              <li>
+                <div class="sr-only">Email Address:</div>
+              <a class="hover:text-gray-200" href="mailto:storkdistro@gmail.com">storkdistro@gmail.com</a>
+            </li>
+          </nav>
+        </div>
+        
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-white tracking-widest text-sm mb-2">GOT QUESTIONS?</h2>
+          <div class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
+            <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
+              <input type="text" id="footer-field" name="footer-field" placeholder="Email Address" class="w-full bg-gray-800 rounded border-0 bg-opacity-80 border-cyan-600 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-cyan-600 text-base outline-none text-gray-100 py-1 px-3 leading-8">
             </div>
-            </p>
+            <button class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex font-medium bg-gray-800 border-0 py-2 px-6 rounded">Get Help</button>
           </div>
+          </p>
         </div>
       </div>
+    </div>
 
-      <div class="bg-gray-900 bg-opacity-80">
-        <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-          <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
-            <img src="{% static "/favicon/favicon-32x32.png" %}">
-            <span class="ml-3 text-xl">Stork Distribution</span>
+    <div class="bg-gray-900 bg-opacity-80">
+      <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+          <img src="{% static "/favicon/favicon-32x32.png" %}">
+          <span class="ml-3 text-xl">Stork Distribution</span>
+        </a>
+        <p class="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2022 Stork Distribution</p>
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <!-- Facebook link -->
+          <a class="text-gray-400" href="https://www.facebook.com/Stork-Distribution-Supplies-100369409309134/">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg>
           </a>
-          <p class="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2022 Stork Distribution</p>
-          <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-            <!-- Facebook link -->
-            <a class="text-gray-400" href="https://www.facebook.com/Stork-Distribution-Supplies-100369409309134/">
-              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-              </svg>
-            </a>
-            <!-- Twitter link
-            <a class="ml-3 text-gray-400">
-              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </a> -->
-            <!-- Instagram link
-            <a class="ml-3 text-gray-400">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-              </svg>
-            </a> -->
-          </span>
-        </div>
+          <!-- Twitter link
+          <a class="ml-3 text-gray-400">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg>
+          </a> -->
+          <!-- Instagram link
+          <a class="ml-3 text-gray-400">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+            </svg>
+          </a> -->
+        </span>
       </div>
-    </footer>
+    </div>
+  </footer>
   <!-- footer -->
-
+  
   {% block scripts %}{% endblock %}
 </body>

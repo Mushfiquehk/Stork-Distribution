@@ -14,12 +14,13 @@ environ.Env.read_env(os.path.join(BASE_DIR / 'stork', '.env'))
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
-ALLOWED_HOSTS = ['storkdistro.com', 'storkdistro.herokuapp.com']
+ALLOWED_HOSTS = ["*"]
 SECURE_SSL_REDIRECT = False
 
 TAILWIND_APP_NAME = 'theme'
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,8 +38,8 @@ INSTALLED_APPS = [
 #    'django_browser_reload',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,6 +69,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'stork.wsgi.application'
 
+MAX_CONN_AGE = 600
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -87,7 +90,7 @@ USE_TZ = True
 # STATIC FILES 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static/'
 ]
@@ -123,7 +126,7 @@ AWS_DEFAULT_ACL=None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
+# NPM_BIN_PATH = "C:\Program Files/nodejs/npm.cmd"
 
 # Debugging in heroku live
 # LOGGING = {

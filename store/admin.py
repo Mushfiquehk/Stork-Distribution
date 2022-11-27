@@ -4,6 +4,9 @@ from store.models import Category, Product, Order, UserProfile, Announcement, Or
 # Register your models here.
 
 admin.site.register(UserProfile)
+class User(admin.ModelAdmin):
+    list_display = ['name', 'is_active']
+    ordering = ['name']
 
 
 @admin.register(Category)
