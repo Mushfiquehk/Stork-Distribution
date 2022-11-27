@@ -1,12 +1,7 @@
 from django.contrib import admin
 from store.models import Category, Product, Order, UserProfile, Announcement, OrderItem
 
-# Register your models here.
-
-@admin.register(UserProfile)
-class UserProfile(admin.ModelAdmin):
-    list_display = ['certificates', 'is_active']
-
+admin.site.register(UserProfile)
 
 @admin.register(Category)
 class Category(admin.ModelAdmin):

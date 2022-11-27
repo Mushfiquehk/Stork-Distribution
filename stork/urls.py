@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from store import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
+    path('admin/', admin.site.urls, name='backstore'),
     path('', include('store.urls')),
     path('logout/', views.user_logout, name='logout'),
     # path("__reload__/", include("django_browser_reload.urls")),
