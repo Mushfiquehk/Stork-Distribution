@@ -1,7 +1,10 @@
 from django.contrib import admin
 from store.models import Category, Product, Order, UserProfile, Announcement, OrderItem
 
-admin.site.register(UserProfile)
+@admin.register(UserProfile)
+class UserProfile(admin.ModelAdmin):
+    list_display = ['certificates', 'is_active']
+    list_editable = ['is_active']
 
 @admin.register(Category)
 class Category(admin.ModelAdmin):
