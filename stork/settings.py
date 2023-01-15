@@ -87,7 +87,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# STATIC FILES 
+# STATIC FILES
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
@@ -108,21 +108,22 @@ INTERNAL_IPS = [
 # EMAIL CONFIG
 # GoDaddy - smtpout.secureserver.net
 #    PORT - 465
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
+EMAIL_HOST_USER = "mushfiquehasankhan@gmail.com"
+EMAIL_HOST_PASSWORD = "tdmkqwkbwbpkjlkr"
 
-DEFAULT_FROM_EMAIL = "admin@storkdistro"
+DEFAULT_FROM_EMAIL = "mushfiquehasankhan@gmail.com"
 SERVER_EMAIL = "server@storkdistro"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AWS_ACCESS_KEY_ID=env("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY=env("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME=env("AWS_STORAGE_BUCKET_NAME")
-AWS_DEFAULT_ACL=None 
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 

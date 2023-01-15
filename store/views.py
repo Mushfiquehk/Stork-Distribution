@@ -19,19 +19,21 @@ from store.models import Product, Category, Order, OrderItem
 from store.forms import OrderForm, SearchForm, UserForm, UserProfileForm
 from store.cart import Cart
 
+
 def index(request):
 
-    new_arrivals = Product.objects.filter(is_active=True).exclude(amount__lte=0).order_by('id').reverse()[:8]
-    featured = Product.objects.filter(is_active=True).exclude(amount__lte=0).order_by('id')[:8]
+    new_arrivals = Product.objects.filter(is_active=True).exclude(
+        amount__lte=0).order_by('id').reverse()[:8]
+    featured = Product.objects.filter(is_active=True).exclude(
+        amount__lte=0).order_by('id')[:8]
     categories = Category.objects.all().order_by('id')
 
-    
     if request.method == 'POST':
         form = SearchForm(request.POST)
         text = form['search_text'].data
         searched = Product.objects.annotate(
             search=SearchVector('name',
-            'category__name'),
+                                'category__name'),
         ).filter(search=text).exclude(amount__lte=0).order_by('id')
         print(text)
         categories = Category.objects.all().order_by('id')
@@ -45,18 +47,17 @@ def index(request):
             products = paginator.page(1)
         except EmptyPage:
             products = paginator.page(paginator.num_pages)
-            
+
         page_obj = paginator.get_page(page_number)
         objects = len(page_obj.object_list)
 
         return render(request, 'store/category_list.html', context={"products": products,
                                                                     "categories": categories,
                                                                     "objects": objects,
-                                                                    "page_obj": page_obj,})
+                                                                    "page_obj": page_obj, })
     else:
-        search_form = SearchForm() 
+        search_form = SearchForm()
 
-    
     return render(request=request, template_name="index.html", context={'new_arrivals': new_arrivals,
                                                                         'featured': featured,
                                                                         'categories': categories,
@@ -65,7 +66,8 @@ def index(request):
 
 def category_list(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    filtered = Product.objects.filter(category=category, is_active=True).exclude(amount__lte=0).order_by('id')
+    filtered = Product.objects.filter(
+        category=category, is_active=True).exclude(amount__lte=0).order_by('id')
     categories = Category.objects.all().order_by('id')
 
     paginator = Paginator(filtered, 28)
@@ -77,7 +79,7 @@ def category_list(request, slug):
         products = paginator.page(1)
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
-        
+
     page_obj = paginator.get_page(page_number)
     objects = len(page_obj.object_list)
 
@@ -86,10 +88,11 @@ def category_list(request, slug):
                                                                                       'objects': objects,
                                                                                       'page_obj': page_obj})
 
+
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
     options = product.options.all()
-    return render(request=request, template_name='store/product_detail.html', context={'product': product, 
+    return render(request=request, template_name='store/product_detail.html', context={'product': product,
                                                                                        'options': options})
 
 
@@ -106,15 +109,16 @@ def order_summary(request, pk):
     if order.is_active == False:
         confirmed = True
 
-    return render(request, 'store/order_summary.html', context={'name': name, 
+    return render(request, 'store/order_summary.html', context={'name': name,
                                                                 'address': address,
                                                                 'item_list': item_list,
                                                                 'confirmed': confirmed,
-                                                                'total': total})   
+                                                                'total': total})
+
 
 @login_required
-def cart_summary(request): 
-    cart = Cart(request)    
+def cart_summary(request):
+    cart = Cart(request)
     user = request.user
 
     if request.method == 'POST' and user.is_authenticated:
@@ -138,7 +142,7 @@ def cart_summary(request):
                 product = item['product']
                 price = item['price']
                 amount = item['amount']
-                order_item = OrderItem(product=product, amount=amount, 
+                order_item = OrderItem(product=product, amount=amount,
                                        order=order, price=price)
                 order_item.save()
 
@@ -148,21 +152,23 @@ def cart_summary(request):
 
             # email notification of order to admin
             subject = 'Order Placed! Reference # ' + str(order_id)
-            message = 'A new order has been placed by ' + str(first_name) + " " + str(last_name) + ". Phone number: " + str(phone_number) + " Email: " + str(email_address) + "."
+            message = 'A new order has been placed by ' + str(first_name) + " " + str(
+                last_name) + ". Phone number: " + str(phone_number) + " Email: " + str(email_address) + "."
             html_email = render_to_string(
-                        'store/order_summary_admin.html',
-                        {
-                        'name': name,
-                        'item_list': item_list
-                        }
-                    )                    
+                'store/order_summary_admin.html',
+                {
+                    'name': name,
+                    'item_list': item_list
+                }
+            )
             send_mail(
-                subject, 
-                message, 
+                subject,
+                message,
                 'storksalesteam@gmail.com',
-                ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',], 
+                ['storkdistro@gmail.com', 'storksalesteam@gmail.com',
+                    'mushfiquehasankhan@gmail.com',],
                 fail_silently=True,
-                html_message= html_email
+                html_message=html_email
             )
 
             return HttpResponseRedirect(reverse('store:order_summary', args=[order_id]))
@@ -177,8 +183,9 @@ def cart_summary(request):
         free_delivery = 0
 
     return render(request, 'store/cart.html', {'order_form': form,
-                                                'total': cart_total,
-                                                'left': free_delivery,})
+                                               'total': cart_total,
+                                               'left': free_delivery, })
+
 
 @login_required
 def update_cart(request):
@@ -197,7 +204,7 @@ def update_cart(request):
         cart.delete(product_id=product_id)
 
     response = JsonResponse({'items': len(cart),
-                             'total': cart_total, 
+                             'total': cart_total,
                              'left': free_delivery})
     return response
 
@@ -209,29 +216,27 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
 
+            subject = 'Request: Customer Verification'
+            message = 'A new customer has created and account. Verification and subsequent authorization from an admin is request. Please follow the link below to sign in and verify. https://storkdistro.com/admin/auth/user/ '
+            send_mail(
+                subject,
+                message,
+                ['mushfiquehasankhan@gmail.com'],
+                ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',],
+                fail_silently=False,
+            )
             user = user_form.save()
             user.set_password(user.password)
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            profile.certificates = request.FILES['certificates']
 
-            profile.save()            
+            profile.save()
             user.save()
+            profile.certificates = request.FILES['certificates']
 
             login(request, user)
 
-            subject = 'New User Authrization Request'
-            message = 'A new user has been created and account. Authorization from an admin is required.'   
-            send_mail(
-                subject, 
-                message, 
-                'storksalesteam@gmail.com',
-                ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',], 
-                fail_silently=True,
-                html_message= 'registration/new_user.html'
-            )
-            
             return HttpResponseRedirect(reverse("store:category_list", args=["accessories"]))
 
     else:
@@ -240,9 +245,8 @@ def register(request):
         profile_form = UserProfileForm()
 
     return render(request, 'store/registration.html', {'user_form': user_form,
-                                                       'profile_form': profile_form,})
+                                                       'profile_form': profile_form, })
 
-                                    
 
 def user_login(request):
     error_message = ""
