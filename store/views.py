@@ -215,9 +215,11 @@ def register(request):
         profile_form = UserProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
+            
+            customer_name = user_form.cleaned_data['username']
 
             subject = 'Request: Customer Verification'
-            message = 'A new customer has created and account. Verification and subsequent authorization from an admin is request. Please follow the link below to sign in and verify. https://storkdistro.com/admin/auth/user/ '
+            message = 'A new customer has created and account.\n\n\t Username: {} \n\nVerification and subsequent authorization from an admin is request.\nPlease follow the link below to sign in and verify.\n\n https://storkdistro.com/admin/auth/user/ '.format(customer_name)
             send_mail(
                 subject,
                 message,
@@ -235,7 +237,7 @@ def register(request):
 
             profile.save()
             user.save()
-            # profile.certificates = request.FILES['certificates']
+            profile.certificates = request.FILES['certificates']
 
             # login(request, user)
 

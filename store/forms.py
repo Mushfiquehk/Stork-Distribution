@@ -1,5 +1,5 @@
 from django import forms
-from store.models import User, UserProfile
+from store.models import User, Customer
 
 
 class OrderForm(forms.Form):
@@ -23,7 +23,7 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta():
-        model = UserProfile
+        model = Customer
         fields = ('website', 'certificates')
 
 

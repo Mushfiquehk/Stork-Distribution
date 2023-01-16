@@ -1,10 +1,21 @@
 from django.contrib import admin
-from store.models import Category, Product, Order, UserProfile, Announcement, OrderItem
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
+from store.models import Category, Product, Order, Customer, Announcement, OrderItem
 
 
-@admin.register(UserProfile)
-class UserProfile(admin.ModelAdmin):
-    list_display = ['certificates']
+class CustomerInline(admin.StackedInline):
+    model = Customer
+    can_delete = False
+    verbose_name_plural = 'customers'
+
+# Define a new User admin
+class UserAdmin(BaseUserAdmin):
+    inlines = (CustomerInline,)
+
+# Re-register UserAdmin
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 
 
 @admin.register(Category)

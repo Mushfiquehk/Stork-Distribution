@@ -5,8 +5,6 @@ from django.core.validators import RegexValidator
 
 from django.contrib.auth.models import User
 
-# Create your models here.
-
 
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
@@ -90,12 +88,12 @@ class OrderItem(models.Model):
         return str(self.pk)
 
 
-class UserProfile(models.Model):
+class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     website = models.URLField(blank=True)
     certificates = models.FileField(
-        upload_to='proofs/', verbose_name='Sales Tax ID', blank=True)
+        upload_to='proofs/', verbose_name='Sales Tax ID')
 
     def __str__(self):
         return self.user.username
