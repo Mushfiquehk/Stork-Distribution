@@ -221,8 +221,9 @@ def register(request):
             send_mail(
                 subject,
                 message,
+                'mushfiquehasankhan@gmail.com',
+                # ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',],
                 ['mushfiquehasankhan@gmail.com'],
-                ['storkdistro@gmail.com', 'storksalesteam@gmail.com', 'mushfiquehasankhan@gmail.com',],
                 fail_silently=False,
             )
             user = user_form.save()
@@ -233,9 +234,10 @@ def register(request):
 
             profile.save()
             user.save()
-            profile.certificates = request.FILES['certificates']
+            # profile.certificates = request.FILES['certificates']
 
-            login(request, user)
+            # login(request, user)
+            user.is_active = False
 
             return HttpResponseRedirect(reverse("store:category_list", args=["accessories"]))
 
