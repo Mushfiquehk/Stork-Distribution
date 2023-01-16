@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.urls import reverse
 from django.core.validators import RegexValidator
@@ -88,7 +87,7 @@ class OrderItem(models.Model):
         return str(self.pk)
 
 
-class Customer(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     website = models.URLField(blank=True)
