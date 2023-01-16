@@ -92,7 +92,6 @@ class OrderItem(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_active = models.BooleanField(default=False)
 
     website = models.URLField(blank=True)
     certificates = models.FileField(

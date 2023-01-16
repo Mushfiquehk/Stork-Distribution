@@ -4,8 +4,7 @@ from store.models import Category, Product, Order, UserProfile, Announcement, Or
 
 @admin.register(UserProfile)
 class UserProfile(admin.ModelAdmin):
-    list_display = ['certificates', 'is_active']
-    list_editable = ['is_active']
+    list_display = ['certificates']
 
 
 @admin.register(Category)

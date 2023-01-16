@@ -92,7 +92,7 @@
                     </svg>
                     Add to bag
                   </button>
-                {% elif not request.user.user_profile.is_active %}
+                {% elif not request.user.is_active %}
                     <p class="text-sm font-medium text-cyan-600 self-end mt-1 mx-1">Please wait while an admin authorizes your registration</p>
                 {% else %}                
                   <a href="{% url 'store:login' %}" class="mt-6 w-full bg-cyan-600 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600">
