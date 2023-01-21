@@ -74,11 +74,11 @@ MAX_CONN_AGE = 600
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DATABASE_NAME"),
-        'USER': env("DATABASE_USER"),
-        'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': env("DATABASE_HOST"),
-        'PORT': env("DATABASE_PORT"),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '!Stork1919',
+        'HOST': "stork-db.cpvhhmtxvinw.us-east-1.rds.amazonaws.com",
+        'PORT': "5432",
     }
 }
 
