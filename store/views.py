@@ -165,10 +165,9 @@ def cart_summary(request):
                 subject,
                 message,
                 'mushfiquehasankhan@gmail.com',
-                # ['storkdistro@gmail.com',
-                #  'storksalesteam@gmail.com',
-                ['mushfiquehasankhan@gmail.com'],
-                #  ],
+                ['storkdistro@gmail.com',
+                 'storksalesteam@gmail.com',
+                'mushfiquehasankhan@gmail.com'],
                 fail_silently=True,
                 html_message=html_email
             )
