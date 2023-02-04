@@ -188,11 +188,8 @@ def cart_summary(request):
                                                'left': free_delivery, })
 
 
-@login_required
 def update_cart(request):
     cart = Cart(request)
-    cart_total = cart.get_total_price()
-    free_delivery = 250 - cart_total
 
     if request.POST.get('action') == 'update':
         product_id = int(request.POST.get('product_id'))
@@ -204,9 +201,11 @@ def update_cart(request):
         product_id = int(request.POST.get('product_id'))
         cart.delete(product_id=product_id)
 
+    cart_total = cart.get_total_price()
+    free_delivery = 250 - cart_total
     response = JsonResponse({'items': len(cart),
                              'total': cart_total,
-                             'left': free_delivery})
+                             'left': free_delivery,})
     return response
 
 
@@ -220,7 +219,7 @@ def register(request):
             customer_name = user_form.cleaned_data['username']
 
             subject = 'Request: Customer Verification'
-            message = 'A new customer has created and account.\n\n\t Username: {} \n\nVerification and subsequent authorization from an admin is request.\nPlease follow the link below to sign in and verify.\n\n https://storkdistro.com/admin/auth/user/ '.format(customer_name)
+            message = 'A new customer has created and account.\n\n\t Username: {} \n\nVerification and subsequent authorization from an admin is request.\nPlease follow the link below to sign in and verify.\n\n https://www.storkdistro.com/admin'.format(customer_name)
             send_mail(
                 subject,
                 message,

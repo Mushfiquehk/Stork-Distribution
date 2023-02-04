@@ -57,7 +57,7 @@ class Order(models.Model):
     phone_number = models.CharField(
         validators=[phone_regex], max_length=17, blank=True, default="9999999999")
     email = models.EmailField(max_length=254)
-    address = models.TextField()
+    address = models.TextField(default='No Address')
     products = models.ManyToManyField(
         Product,
         through='OrderItem',

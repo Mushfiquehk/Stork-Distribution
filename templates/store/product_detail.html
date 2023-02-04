@@ -53,6 +53,7 @@
               <h3 id="amounts-heading" class="sr-only">Product amounts</h3>
 
               <form>
+                {% csrf_token %}
                 <!-- Amount -->
                 <div class="mt-8">
                   <div class="flex items-center justify-start">
@@ -67,7 +68,7 @@
                     <legend class="sr-only">Choose an amount</legend>
 
                     <label class="group relative mb-4 flex items-center justify-center text-sm font-medium shadow-sm uppercase">
-                      <input type="number" name="amount" min="0" max="{{ product.amount }}" id="amount" value="1" class="border border-gray-200 rounded-md w-full focus:bg-gray-100 focus:outline-none sm:flex-1 bg-white text-gray-900 cursor-pointer" aria-labelledby="amount-select">
+                      <input type="number" name="amount" min="0" max="{{ product.amount }}" id="amount" placeholder="1" class="border border-gray-200 rounded-md w-full focus:bg-gray-100 focus:outline-none sm:flex-1 bg-white text-gray-900 cursor-pointer" aria-labelledby="amount-select">
                     </label>
 
                     <div class="grid grid-cols-4 gap-2">                      
@@ -83,7 +84,7 @@
                   </fieldset>
                 </div>
 
-                <div id="amount-error"></div>
+                <div id="amount-error" class="font-medium text-sm text-text-orange-500 pt-1"></div>
 
                 {% if request.user.is_authenticated and request.user.is_active %}
                   <button id="update-cart" value="{{ product.id }}" class="mt-6 w-full bg-cyan-600 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600">
@@ -111,36 +112,39 @@
   </div>
 </section>
 
-{% endblock %}
-
-{% block scripts %}
-<script src="{% static "store/js/product_detail.js" %}"></script>
-<script>
-  // script to update cart with product 
+<script type="text/javascript" src="{% static "store/js/product_detail.js" %}"></script>
+<script type='text/javascript'>
+  // script to update cart with product   
+  const addToCart = document.getElementById('update-cart')
+  const amount = document.getElementById('amount')
   
-  const addToCart = document.querySelector('#update-cart')
-  const amountSel = document.getElementById('amount').value
-  const maxAmount = document.getElementById('amount').max
   addToCart.addEventListener('click', function (event) {
     event.preventDefault();
-    if (amountSel>0 && (amountSel <= maxAmount)) {        
+    if ((amount.value > 0) && (amount.value <= amount.max)) {        
     $.ajax({
       type: 'POST',
       url: "{% url 'store:update_cart' %}",
       data: {
-        product_id: $('#update-cart').val(),
-        amount: amountSel, 
+        product_id: addToCart.value,
+        amount: amount.value, 
         csrfmiddlewaretoken: "{{ csrf_token }}",
         action: 'update',
       },
       success: function (json) {
-        $("#cart-items").innerHTML = json.items
+        $("#cart-items").innerHTML = json.items;
+        $("#amount-error").innerHTML = "Added to cart!";
+        location.reload();
       },
       error: function (xhr, errmsg, err) {
-        $("#amount-error").innerHTML = "This amount of product is not in stock. Please contact store."
+        $("#amount-error").innerHTML = "This amount of product is not in stock. Please contact store.";
       }
     });
+    } else {
+      console.log('clicked');
+
+      document.getElementById('amount-error').innerHTML = "This amount unavailable. Please call store to place a request";    
     };
   });
 </script>
+
 {% endblock %}

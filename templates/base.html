@@ -18,9 +18,10 @@
   <link rel="stylesheet" href="{% static 'store/css/base.css' %}"> 
   {% block styles %}{% endblock %}
 
-  <script src="{% static 'store/js/base.js' %}"></script>
-  <script src="{% static 'store/js/jquery-3.6.0.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'store/js/base.js' %}"></script>
+  <script type="text/javascript" src="{% static 'store/js/jquery-3.6.0.min.js' %}"></script>
     
+  {% block scripts %}{% endblock %}
 </head>
 
 <body>
@@ -201,6 +202,4 @@
     </div>
   </footer>
   <!-- footer -->
-  
-  {% block scripts %}{% endblock %}
 </body>

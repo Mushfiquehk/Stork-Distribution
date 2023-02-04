@@ -154,35 +154,35 @@
 
      
 </section>
-{% endblock %}
 
-{% block scripts %}
 <script>
-// script to update cart with product 
-
-const dellButts = document.querySelectorAll('.delete-cart');
-
-for (var i = 0; i < dellButts.length; i++) {
-    const delButton = dellButts[i];
-    const product_id = dellButts[i].value;
-
-    delButton.addEventListener('click', function (event) {
-        event.preventDefault();      
-        $.ajax({
-        type: 'POST',
-        url: "{% url 'store:update_cart' %}",
-        data: {
-            product_id: product_id,
-            csrfmiddlewaretoken: "{{ csrf_token }}",
-            action: 'delete',
-        },
-        success: function (json) {
-            $("#cart-items").innerHTML = json.items
-        },
-        error: function (xhr, errmsg, err) {}
+    // script to update cart with product 
+    
+    const dellButts = document.querySelectorAll('.delete-cart');
+    
+    for (var i = 0; i < dellButts.length; i++) {
+        const delButton = dellButts[i];
+        const product_id = dellButts[i].value;
+    
+        delButton.addEventListener('click', function (event) {
+            event.preventDefault();      
+            $.ajax({
+            type: 'POST',
+            url: "{% url 'store:update_cart' %}",
+            data: {
+                product_id: product_id,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                action: 'delete',
+            },
+            success: function (json) {
+                $("#cart-items").innerHTML = json.items;
+                location.reload();
+            },
+            error: function (xhr, errmsg, err) {
+                location.reload();
+            }
+            });
         });
-    });
-}
-
+    }
 </script>
 {% endblock %}

@@ -77,8 +77,8 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': '!Stork1919',
-        'HOST': "stork-db.cpvhhmtxvinw.us-east-1.rds.amazonaws.com",
-        'PORT': "5432",
+        'HOST': 'stork-db.cpvhhmtxvinw.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
