@@ -30,8 +30,7 @@
                                 <div class="text-gray-500">Quantity: {{ item.amount }}</div>
                                 <div class="text-gray-500 font-medium">Total: &dollar;{{ item.total_price }}</div>
                                 <div>
-                                    <a href="{{ product.get_absolute_url }}" class="px-2 text-blue-600  font-medium hover:underline">Update</a>
-                                    <!-- turn this to button with onclick ajax function to update cart with action delete -->
+                                    <a href="{{ product.get_absolute_url }}" class="px-2 text-blue-600 font-medium hover:underline">Update</a>
                                     <button value="{{ product.id }}" class="delete-cart text-orange-600 font-medium hover:underline">Delete</button>  
                                 </div>                        
                             </div>
@@ -43,7 +42,7 @@
                     <hr/>
                     <div class="flex justify-between my-2">
                         <div class="text-gray-600">
-                            <p class='font-extrabold text-lg'>Cart Total:</p> 
+                            <p class='font-extrabold text-lg'>Total:</p> 
                             <p class="text-xs">Minimum $250 for free delivery inside greater Tulsa area.<p>
                             <p class="text-xs">$10 delivery added to total otherwise.<p>
                             {% if left %}

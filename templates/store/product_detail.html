@@ -120,7 +120,9 @@
   
   addToCart.addEventListener('click', function (event) {
     event.preventDefault();
-    if ((amount.value > 0) && (amount.value <= amount.max)) {        
+    let selected_value = parseInt(amount.value);
+    let available_amount = parseInt(amount.max);
+    if (selected_value > 0 && selected_value <= available_amount) {        
     $.ajax({
       type: 'POST',
       url: "{% url 'store:update_cart' %}",
@@ -131,12 +133,12 @@
         action: 'update',
       },
       success: function (json) {
+        location.reload();
         $("#cart-items").innerHTML = json.items;
         $("#amount-error").innerHTML = "Added to cart!";
-        location.reload();
       },
       error: function (xhr, errmsg, err) {
-        $("#amount-error").innerHTML = "This amount of product is not in stock. Please contact store.";
+        $("#amount-error").innerHTML = "This amount of product is not in stock. Please call or email to place a request";
       }
     });
     } else {
