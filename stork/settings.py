@@ -32,10 +32,10 @@ INSTALLED_APPS = [
     'gunicorn',
     'theme',
     'store',
-    'storages',
+    'storages'
 ]
-
 #    'django_browser_reload',
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
