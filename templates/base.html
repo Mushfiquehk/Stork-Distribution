@@ -1,205 +1,187 @@
 <!DOCTYPE html>
 {% load static %}
 {% load tailwind_tags %}
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Stork Distribution{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Home page of online point of sale for Stork Distribution and Supply LLC, Oklahoma">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" alt="Icon of website">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" alt="Icon of website">
-  <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      {% block title %}
+        Stork Distribution
+      {% endblock %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Home page of online point of sale for Stork Distribution and Supply LLC, Oklahoma" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" alt="Icon of website" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" alt="Icon of website" />
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
 
-  {% tailwind_preload_css %}
-  {% tailwind_css %}
-  <link rel="stylesheet" href="{% static 'store/css/base.css' %}"> 
-  {% block styles %}{% endblock %}
-
-  <script type="text/javascript" src="{% static 'store/js/base.js' %}"></script>
-  <script type="text/javascript" src="{% static 'store/js/jquery-3.6.0.min.js' %}"></script>
-    
-  {% block scripts %}{% endblock %}
-</head>
-
-<body>
-  <!-- Navbar -->
-  <header class="bg-cyan-600" style="position:sticky;top:0px;z-index:50">
-    <div class="container px-4 py-4 mx-auto md:flex md:justify-between md:items-center">
-      <div class="flex items-center justify-between">
-        <!-- Brand Name -->
-        <div>
-            <a href="{% url 'store:home' %}">
-              <h1 class="text-2xl font-bold tracking-wide transition-colors duration-200 transform text-white lg:text-3xl hover:text-gray-300">Stork Distribution</h1>
-            </a>
-        </div>
-
-        <div class="flex justify-end">
-
-          <!-- Cart icon for md screens and larger -->
-          <div class="my-1 mr-2 flex md:hidden">
-            <a class="relative text-gray-200 hover:text-gray-600 transition-colors duration-200 transform" href="{% url 'store:cart_summary' %}">
-              
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-
-              <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
-                {% with total_items=cart|length %}
-                <p id="cart-items" class="d-inline-flex">
-                  {% if total_items > 0 %}
-                      {{ total_items }}
-                  {% else %}
-                      0
-                  {% endif %}
-                </p>
-                {% endwith %}  
-              </span>
-            </a>   
-          </div> <!-- Cart icon -->
-          
-          <!-- Mobile Menu dropdown -->
-          <div class="flex md:hidden ml-2" id="menu-dropdown">
-            <button type="button" class="text-gray-200 hover:text-gray-400 focus:outline-none focus:text-gray-400" aria-label="toggle menu">
-                <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                    <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                </svg>
-            </button>
-          </div><!-- Mobile menu dropdown -->
-
-        </div>                
-      </div>
-      <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-      <div class="items-center hidden md:flex mt-2 z-50" id="menu-items">
-
-        <div class="flex flex-col md:flex-row md:mx-6">
-          <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:home' %}">Home</a>
-          <a class="my-1 hidden text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="#">Custom Design</a>
-
-
-          {% if user.is_authenticated %}
-            <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:category_list' slug="cones" %}">Shop</a>
-            <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'logout' %}">Logout</a>
-          {% else %}
-            <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:login' %}">Sign in</a>
-          {% endif %}
-
-          <!-- Cart icon for mobile screen -->
-          <div class="my-1 mx-1 justify-center hidden md:block">
-            <a class="relative text-gray-200 hover:text-gray-600 transition-colors duration-200 transform" href="{% url 'store:cart_summary' %}">
-              <!-- Cart icon -->
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <!-- Number of items added -->
-              <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
-                {% with total_items=cart|length %}
-                <p id="cart-items" class="d-inline-flex">
-                  {% if total_items > 0 %}
-                      {{ total_items }}
-                  {% else %}
-                      0
-                  {% endif %}
-                </p>
-                {% endwith %}  
-              </span>
-
-            </a>
-          </div> <!-- cart icon -->
-
-        </div>
-      </div>
-
-    </div>
-    
-  </header>
-
-  <main class="relative">
-    {% block content %} 
+    {% tailwind_preload_css %}
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'store/css/base.css' %}" />
+    {% block styles %}
 
     {% endblock %}
-  </main>
-  <!-- Footer -->
-  <footer class="text-white bg-cyan-600 body-font">
-    <div class="container px-5 lg:px-0 py-8 mx-auto">
-      <div class="flex flex-wrap md:text-left text-center order-first">
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium tracking-widest text-sm mb-3">LOCATION</h2>
-          <address class="mb-10 font-medium text-sm">
-            <div>9912 E 45th Pl STE A</div>
-            <div>Tulsa, OK 74146</div>
-          </address>
+
+    <script type="text/javascript" src="{% static 'store/js/base.js' %}"></script>
+    <script type="text/javascript" src="{% static 'store/js/jquery-3.6.0.min.js' %}"></script>
+
+    {% block scripts %}
+
+    {% endblock %}
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header class="bg-cyan-600" style="position:sticky;top:0px;z-index:50">
+      <div class="container px-4 py-4 mx-auto md:flex md:justify-between md:items-center">
+        <div class="flex items-center justify-between">
+          <!-- Brand Name -->
+          <div>
+            <a href="{% url 'store:home' %}"><h1 class="text-2xl font-bold tracking-wide transition-colors duration-200 transform text-white lg:text-3xl hover:text-gray-300">Stork Distribution</h1></a>
+          </div>
+
+          <div class="flex justify-end">
+            <!-- Cart icon for md screens and larger -->
+            <div class="my-1 mr-2 flex md:hidden">
+              <a class="relative text-gray-200 hover:text-gray-600 transition-colors duration-200 transform" href="{% url 'store:cart_summary' %}">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
+                    {{ cart|length }}
+                </span>
+              </a>
+            </div> <!-- Cart icon -->
+
+            <!-- Mobile Menu dropdown -->
+            <div class="flex md:hidden ml-2" id="menu-dropdown">
+              <button type="button" class="text-gray-200 hover:text-gray-400 focus:outline-none focus:text-gray-400" aria-label="toggle menu">
+                <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                  <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                </svg>
+              </button>
+            </div>
+            <!-- Mobile menu dropdown -->
+          </div>
         </div>
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+        <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+        <div class="items-center hidden md:flex mt-2 z-50" id="menu-items">
+          <div class="flex flex-col md:flex-row md:mx-6">
+            <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:home' %}">Home</a>
+            <a class="my-1 hidden text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="#">Custom Design</a>
+
+            {% if user.is_authenticated %}
+              <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:category_list' %}">Shop</a>
+              <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+              <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:login' %}">Sign in</a>
+            {% endif %}
+
+            <!-- Cart icon for mobile screen -->
+            <div class="my-1 mx-1 justify-center hidden md:block">
+              <a class="relative text-gray-200 hover:text-gray-600 transition-colors duration-200 transform" href="{% url 'store:cart_summary' %}">
+                <!-- Cart icon -->
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <!-- Number of items added -->
+                <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
+                    {{ cart|length }}
+                </span>
+              </a>
+            </div> <!-- cart icon -->
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="relative">
+      {% block content %}
+
+      {% endblock %}
+    </main>
+    <!-- Footer -->
+    <footer class="text-white bg-cyan-600 body-font">
+      <div class="container px-5 lg:px-0 py-8 mx-auto">
+        <div class="flex flex-wrap md:text-left text-center order-first">
+          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 class="title-font font-medium tracking-widest text-sm mb-3">LOCATION</h2>
+            <address class="mb-10 font-medium text-sm">
+              <div>9912 E 45th Pl STE A</div>
+              <div>Tulsa, OK 74146</div>
+            </address>
+          </div>
+          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
             <h2 class="title-font font-medium tracking-widest text-sm mb-3">STORE HOUR</h2>
             <nav class="list-none mb-10 font-medium text-sm">
               <li>
                 <a class="hover:text-gray-200">Monday - Saturday: 10AM-6PM</a>
-              </li>   
+              </li>
               <li>
                 <a class="hover:text-gray-300 text-sm">Closed Sunday</a>
-              </li>               
+              </li>
             </nav>
           </div>
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium tracking-widest text-sm mb-3">CONTACT</h2>
-          <nav class="list-none mb-10 font-medium text-sm">
-            <li>
-              <div class="sr-only">Phone Number:</div>
-              <a class="hover:text-gray-200" href="tel:+9185616863">(918) 561-6863</a>
+          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 class="title-font font-medium tracking-widest text-sm mb-3">CONTACT</h2>
+            <nav class="list-none mb-10 font-medium text-sm">
+              <li>
+                <div class="sr-only">Phone Number:</div>
+                <a class="hover:text-gray-200" href="tel:+9185616863">(918) 561-6863</a>
               </li>
               <li>
                 <div class="sr-only">Email Address:</div>
-              <a class="hover:text-gray-200" href="mailto:storkdistro@gmail.com">storkdistro@gmail.com</a>
-            </li>
-          </nav>
-        </div>
-        
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium text-white tracking-widest text-sm mb-2">GOT QUESTIONS?</h2>
-          <div class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-            <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-              <input type="text" id="footer-field" name="footer-field" placeholder="Email Address" class="w-full bg-gray-800 rounded border-0 bg-opacity-80 border-cyan-600 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-cyan-600 text-base outline-none text-gray-100 py-1 px-3 leading-8">
-            </div>
-            <button class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex font-medium bg-gray-800 border-0 py-2 px-6 rounded">Get Help</button>
+                <a class="hover:text-gray-200" href="mailto:storkdistro@gmail.com">storkdistro@gmail.com</a>
+              </li>
+            </nav>
           </div>
-          </p>
+
+          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 class="title-font font-medium text-white tracking-widest text-sm mb-2">GOT QUESTIONS?</h2>
+            <div class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
+              <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
+                <input type="text" id="footer-field" name="footer-field" placeholder="Email Address" class="w-full bg-gray-800 rounded border-0 bg-opacity-80 border-cyan-600 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-cyan-600 text-base outline-none text-gray-100 py-1 px-3 leading-8" />
+              </div>
+              <button class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex font-medium bg-gray-800 border-0 py-2 px-6 rounded">Get Help</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="bg-gray-900 bg-opacity-80">
-      <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-        <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
-          <img src="{% static "/favicon/favicon-32x32.png" %}">
-          <span class="ml-3 text-xl">Stork Distribution</span>
-        </a>
-        <p class="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2022 Stork Distribution</p>
-        <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-          <!-- Facebook link -->
-          <a class="text-gray-400" href="https://www.facebook.com/Stork-Distribution-Supplies-100369409309134/">
-            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-            </svg>
+      <div class="bg-gray-900 bg-opacity-80">
+        <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+          <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+            <img src="{% static '/favicon/favicon-32x32.png' %}" />
+            <span class="ml-3 text-xl">Stork Distribution</span>
           </a>
-          <!-- Twitter link
+          <p class="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2022 Stork Distribution</p>
+          <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+            <!-- Facebook link -->
+            <a class="text-gray-400" href="https://www.facebook.com/Stork-Distribution-Supplies-100369409309134/">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+              </svg>
+            </a>
+            <!--       Twitter link
           <a class="ml-3 text-gray-400">
             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
               <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
             </svg>
-          </a> -->
-          <!-- Instagram link
+          </a>       -->
+            <!--       Instagram link
           <a class="ml-3 text-gray-400">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
             </svg>
-          </a> -->
-        </span>
+          </a>       -->
+          </span>
+        </div>
       </div>
-    </div>
-  </footer>
-  <!-- footer -->
-</body>
+    </footer>
+    <!-- footer -->
+  </body>
+</html>
