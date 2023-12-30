@@ -1,185 +1,182 @@
-{% extends "./base.html" %}
+{% extends './base.html' %}
 {% load static %}
 
 {% block content %}
-
-<!-- Discounts -->
-<div style="background: #eee758" class="py-2 text-sm tracking-wide font-medium text-center">
-  Visit our Facebook page <a href="https://m.facebook.com/Stork-Distribution-Supplies-100369409309134/" class="underline font-medium">here</a>
-</div>
-
-<!-- Announcements -->
-<div class="">
-  <div class="container min-w-full">
-    <img alt="store" class="object-cover object-center w-fit" src="{% static 'home_images/banner.png' %}">
+  <!-- Discounts -->
+  <div style="background: #eee758" class="py-2 text-sm tracking-wide font-medium text-center">
+    Visit our Facebook page <a href="https://m.facebook.com/Stork-Distribution-Supplies-100369409309134/" class="underline font-medium">here</a>
   </div>
-</div>
-<hr>
 
-<!-- Categories -->
-<section class="bg-gray-100">
-  <div class="container mx-auto py-2 md:py-4 px-2 sm:px-0">
-    <h2 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 py-1">Shop Categories</h1>
-    <div class="flex overflow-x-auto py-4">
-      {% for category in categories %}
-      <div class="flex-shrink-0 rounded-full mx-1">      
-        <a href="{{ category.get_absolute_url }}" class="flex flex-col items-center">
-          <img alt="image of a category of product" class="rounded-full shadow-md object-cover object-center" src="{{ category.image.url }}" style="height:72px;width:72px;">     
-          <p class="mt-2 font-medium text-sm text-center text-gray-500">{{ category.name }}</p>   
-      </a>
-      </div> 
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-
-<!-- Search and Navs -->
-{% comment %} <section class="container mx-auto py-2 md:py-4 px-2">
-  <div class="flex justify-center">
-    <div class="border-2 border-cyan-600 p-2 rounded-lg mx-1">
-      <a href="{% url 'store:category_list' slug='accessories' %}" class="no-underline text-sm font-medium">View All Products</a>
-    </div>
-
-    <form class="flex items-center mx-1" action="{% url "store:home" %}" method="POST">   
-      {% csrf_token %}
-      <label for="simple-search" class="sr-only">Search</label>
-      <div class="relative w-full">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-          </div>
-          <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full pl-10 p-2.5" placeholder="Search Products" required>
-          {{ search_form.search_text }}
-      </div>
-      <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-cyan-600 rounded-lg border border-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-cyan-300">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <span class="sr-only">Search</span>
-      </button>
-    </form> 
-  </div> {% endcomment %}
-  
-  
-
-</section>
-
-
-<!-- BEST SELLERS -->
-<section class="bg-white text-gray-600 body-font">
-    <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
-        <div class="w-full flex-wrap mb-4 lg:mb-8">
-            <h2 class="text-2xl sm:text-3xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h1>
-            <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
+  <!-- Announcements -->
+  <div class="">
+    <div class="container min-w-full h-screen/2">
+      <!-- Photo Grid -->
+      <div class="grid grid-cols-2 gap-4 bg-gray-800 px-4">
+        <div class="col-span-1 flex justify-center items-center">
+          <img src="{% static 'home_images/left.jpg' %}" alt="Left Image" class="object-cover object-center h-full w-full" />
         </div>
-        <!-- Product Cards -->
-        <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
-          {% for product in new_arrivals %}
-          <div class="flex flex-col justify-between content-start py-4 px-4 shadow-md rounded-lg">
-            <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}">
-              <img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}">
+        <div class="col-span-1 grid grid-rows-2 gap-4">
+          <div class="row-span-1 flex justify-center items-center">
+            <img src="{% static 'home_images/top.jpg' %}" alt="Top Image" class="object-cover object-center h-full w-full" />
+          </div>
+          <div class="row-span-1 flex justify-center items-center">
+            <img src="{% static 'home_images/bottom.jpg' %}" alt="Bottom Image" class="object-cover object-center h-full w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+
+  <!-- Categories -->
+  <section class="bg-gray-100">
+    <div class="container mx-auto py-2 md:py-4 px-2 sm:px-0">
+      <h2 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 py-1">Shop Categories</h2>
+      <div class="flex overflow-x-auto py-4">
+        {% for category in categories %}
+          <div class="flex-shrink-0 rounded-full mx-1">
+            <a href="{{ category.get_absolute_url }}" class="flex flex-col items-center">
+              <img alt="image of a category of product" class="rounded-full shadow-md object-cover object-center" src="{{ category.image.url }}" style="height:72px;width:72px;" />
+              <p class="mt-2 font-medium text-sm text-center text-gray-500">{{ category.name }}</p>
             </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Search and Navs -->
+  {% comment %} <section class="container mx-auto py-2 md:py-4 px-2">
+    <div class="flex justify-center">
+      <div class="border-2 border-cyan-600 p-2 rounded-lg mx-1">
+        <a href="{% url 'store:category_list' slug = 'accessories' %}" class="no-underline text-sm font-medium">View All Products</a>
+      </div>
+
+      <form class="flex items-center mx-1" action="{% url 'store:home' %}" method="POST">
+        {% csrf_token %}
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full pl-10 p-2.5" placeholder="Search Products" required />
+          {{ search_form.search_text }}
+        </div>
+        <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-cyan-600 rounded-lg border border-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-cyan-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <span class="sr-only">Search</span>
+        </button>
+      </form>
+    </div> {% endcomment %}
+  </section>
+
+  <!-- BEST SELLERS -->
+  <section class="bg-white text-gray-600 body-font">
+    <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
+      <div class="w-full flex-wrap mb-4 lg:mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">New Arrivals</h2>
+        <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base"></p>
+      </div>
+      <!-- Product Cards -->
+      <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
+        {% for product in new_arrivals %}
+          <div class="flex flex-col justify-between content-start py-4 px-4 shadow-md rounded-lg">
+            <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}"><img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}" /></a>
 
             <div class="my-2">
-              <h4 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
-              <h3 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
+              <h4 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h4>
+              <h3 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h3>
             </div>
 
             <div class="justify-self-end mt-4">
-              <a href="{{ product.get_absolute_url }}" class="no-underline">
-                <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
-              </a>
+              <a href="{{ product.get_absolute_url }}" class="no-underline"><div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div></a>
             </div>
           </div>
-          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner -->
+  <div class="bg-gray-800">
+    <div class="container md:flex justify-between mx-auto">
+      <img alt="products" class="object-cover object-center h-64 w-full" src="{% static 'home_images/left.jpg' %}" />
+      <img alt="products" class="object-cover object-center w-full h-64" src="{% static 'home_images/right.jpg' %}" />
+    </div>
+  </div>
+
+  <!-- Custom Designs -->
+  <section class="bg-gray-800 lg:py-8 lg:flex lg:justify-center lg:min-h-full">
+    <div class="">
+      <div class="max-w-2xl mx-auto py-12 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
+        <div>
+          <h2 class="text-2xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs</h2>
+          <p class="text-lg font-medium">Coming soon . . . .</p>
+          <p class="mt-4 text-gray-400">Create custom designs specific to the packaging needs of your business. Contact us to consult on a design and get quotes on your order.</p>
+
+          <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+            <div class="border-t border-gray-200 pt-4">
+              <dt class="font-medium text-lg text-gray-200">Size</dt>
+              <dd class="mt-2 text-sm text-gray-400">All our available sizes.</dd>
+            </div>
+
+            <div class="border-t border-gray-200 pt-4">
+              <dt class="font-medium text-lg text-gray-200">Material</dt>
+              <dd class="mt-2 text-sm text-gray-400">List of materials available to choose from.</dd>
+            </div>
+
+            <div class="border-t border-gray-200 pt-4">
+              <dt class="font-medium text-lg text-gray-200">Dimensions</dt>
+              <dd class="mt-2 text-sm text-gray-400">Ask for options to choose from</dd>
+            </div>
+
+            <div class="border-t border-gray-200 pt-4">
+              <dt class="font-medium text-lg text-gray-200">Finish</dt>
+              <dd class="mt-2 text-sm text-gray-400">Crafted to your needs.</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
+          <img src="{% static 'custom_images/custom_branding_concentrate.png' %}" alt="Custom-made concentrate box" class="bg-gray-100 rounded-lg" />
+          <img src="{% static 'custom_images/custom_cartridge_box.png' %}" alt="A flip top custom made cartridge box" class="bg-gray-100 rounded-lg" />
+          <img src="{% static 'custom_images/custom_droper.png' %}" alt="Custom-made fropper and container" class="bg-gray-100 rounded-lg" />
+          <img src="{% static 'custom_images/custom_mylar_bag.png' %}" alt="Custom-made mylar bag" class="bg-gray-100 rounded-lg" />
         </div>
       </div>
     </div>
-</section>
+  </section>
 
-<!-- Banner -->
-<div class="bg-gray-800">
-  <div class="container md:flex justify-between mx-auto">
-    <img alt="products" class="object-cover object-center h-64 w-full" src="{% static 'home_images/left.png' %}">
-    <img alt="products" class="object-cover object-center w-full h-64" src="{% static 'home_images/right.png' %}">
-  </div>
-</div>
-
-<!-- Custom Designs -->
-<section class="bg-gray-800 lg:py-8 lg:flex lg:justify-center lg:min-h-full">
-  <div class="">
-    <div class="max-w-2xl mx-auto py-12 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
-      <div>
-        <h2 class="text-2xl font-extrabold tracking-tight text-gray-200 sm:text-4xl">Custom Designs</h2>
-        <p class="text-lg font-medium">Coming soon . . . .</p>
-        <p class="mt-4 text-gray-400">Create custom designs specific to the packaging needs of your business. Contact us to consult on a design and get quotes on your order.</p>
-  
-        <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-          <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-lg text-gray-200">Size</dt>
-            <dd class="mt-2 text-sm text-gray-400">All our available sizes.</dd>
-          </div>
-  
-          <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-lg text-gray-200">Material</dt>
-            <dd class="mt-2 text-sm text-gray-400">List of materials available to choose from.</dd>
-          </div>
-  
-          <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-lg text-gray-200">Dimensions</dt>
-            <dd class="mt-2 text-sm text-gray-400">Ask for options to choose from</dd>
-          </div>
-  
-          <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-lg text-gray-200">Finish</dt>
-            <dd class="mt-2 text-sm text-gray-400">Crafted to your needs.</dd>
-          </div>
-
-        </dl>
-      </div>
-      <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-        <img src="{% static 'custom_images/custom_branding_concentrate.png' %}" alt="Custom-made concentrate box" class="bg-gray-100 rounded-lg">
-        <img src="{% static 'custom_images/custom_cartridge_box.png' %}" alt="A flip top custom made cartridge box" class="bg-gray-100 rounded-lg">
-        <img src="{% static 'custom_images/custom_droper.png' %}" alt="Custom-made fropper and container" class="bg-gray-100 rounded-lg">
-        <img src="{% static 'custom_images/custom_mylar_bag.png' %}" alt="Custom-made mylar bag" class="bg-gray-100 rounded-lg">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Featured -->
-<section class="bg-white my-1 text-gray-600 body-font">
-  <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
+  <!-- Featured -->
+  <section class="bg-white my-1 text-gray-600 body-font">
+    <div class="container mx-auto py-4 md:py-8 px-2 sm:px-0">
       <div class="w-full flex-wrap mb-4 lg:mb-8">
-        <h2 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Featured Products</h1>
+        <h2 class="sm:text-3xl text-2xl font-extrabold title-font text-gray-800 hover:text-cyan-600 lg:w-1/3 lg:mb-0 mb-4">Featured Products</h2>
       </div>
       <!-- Product Cards -->
       <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
         {% for product in featured %}
-        <div class="flex flex-col justify-between content-center py-4 px-4 shadow-md rounded-lg">
-          
-          <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}">
-            <img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}">
-          </a>
+          <div class="flex flex-col justify-between content-center py-4 px-4 shadow-md rounded-lg">
+            <a class="flex justify-center content-center self-center rounded overflow-hidden" href="{{ product.get_absolute_url }}"><img alt="new_arrivals" class="object-cover object-center" src="{{ product.image.url }}" /></a>
 
-          <div class="my-2">
-            <h4 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h3>
-            <h3 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h2>
-          </div>
+            <div class="my-2">
+              <h4 class="text-gray-500 text-xs tracking-widest title-font my-1">{{ product.category }}</h4>
+              <h3 class="text-gray-900 body-font text-md font-medium leading-4 my-1">{{ product.name }}</h3>
+            </div>
 
-          <div class="justify-self-end mt-4">
-            {% if user.is_authenticated %}
-              <a href="{{ product.get_absolute_url }}" class="no-underline">
-                <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
-              </a>
-            {%else %}
-              <a href="{% url 'store:login' %}" class="no-underline">
-                <div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div>
-              </a>
-            {% endif %}
+            <div class="justify-self-end mt-4">
+              {% if user.is_authenticated %}
+                <a href="{{ product.get_absolute_url }}" class="no-underline"><div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div></a>
+              {% else %}
+                <a href="{% url 'store:login' %}" class="no-underline"><div class="bg-cyan-600 hover:bg-cyan-800 text-white text-center font-medium py-2 px-4 rounded-md w-full">View Product</div></a>
+              {% endif %}
+            </div>
           </div>
-        </div>
         {% endfor %}
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endblock %}
