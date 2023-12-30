@@ -50,9 +50,7 @@
                   <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
 
-                <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
-                    {{ cart|length }}
-                </span>
+                <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">{{ cart|length }}</span>
               </a>
             </div> <!-- Cart icon -->
 
@@ -74,7 +72,7 @@
             <a class="my-1 hidden text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="#">Custom Design</a>
 
             {% if user.is_authenticated %}
-              <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:category_list' %}">Shop</a>
+              <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:category_list' 'cones' %}">Shop</a>
               <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'logout' %}">Logout</a>
             {% else %}
               <a class="my-1 text-sm font-medium text-gray-100 transition-colors duration-200 transform hover:text-blue-400 md:mx-4 md:my-0" href="{% url 'store:login' %}">Sign in</a>
@@ -88,9 +86,7 @@
                   <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 <!-- Number of items added -->
-                <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">
-                    {{ cart|length }}
-                </span>
+                <span class="absolute font-medium -top-3 left-2 text-xs rounded-full">{{ cart|length }}</span>
               </a>
             </div> <!-- cart icon -->
           </div>
@@ -165,19 +161,19 @@
                 <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
               </svg>
             </a>
-            <!--       Twitter link
+            <!--        Twitter link
           <a class="ml-3 text-gray-400">
             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
               <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
             </svg>
-          </a>       -->
-            <!--       Instagram link
+          </a>        -->
+            <!--        Instagram link
           <a class="ml-3 text-gray-400">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
             </svg>
-          </a>       -->
+          </a>        -->
           </span>
         </div>
       </div>
