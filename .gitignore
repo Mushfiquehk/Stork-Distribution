@@ -1,8 +1,10 @@
-# environment variables
-.env 
-./stork/.env
+# Django gitignore files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
 db.sqlite3
-env
-**/*.pyc
-store/_pycache
-staticfiles/
+media/
+static/
+venv/
