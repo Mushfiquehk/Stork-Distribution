@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p(&&8djf7@ac_9lngcj%0p*(l064!(sy7igh98@)ak0seyso-r'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'stork',
         'USER': 'postgres',
-        'PASSWORD': 'MHK12345',
+        'PASSWORD': 'pwd',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -122,8 +122,8 @@ INTERNAL_IPS = [
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mushfiquehasankhan@gmail.com'
-EMAIL_HOST_PASSWORD = 'wdftctedquyrfkzc'
+EMAIL_HOST_USER = 'email' # enter gmail here
+EMAIL_HOST_PASSWORD = 'pwd'
 
 
 # Default primary key field type
